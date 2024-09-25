@@ -85,12 +85,12 @@ import { FiShoppingCart, FiLogOut } from "react-icons/fi";
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState('');
 
-  const handleLinkClick = (link) => {
+  const handleLinkClick = (link: string) => {
     setActiveLink(link);
   };
 
   return (
-    <div className="flex flex-col bg-[#263C5A] h-screen p-6 md:p-12 lg:p-14 space-y-10 md:space-y-14 w-64 md:w-72 lg:w-80">
+    <div className="flex flex-col bg-[#263C5A] h-screen p-6 md:p-12 lg:p-14 space-y-10 md:space-y-14 w-64 md:w-72 lg:w-70">
       <div className="flex items-center space-x-2 mb-6 md:mb-8">
         <Image
           src="/images/bmlogo.png"
