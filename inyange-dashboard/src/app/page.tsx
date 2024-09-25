@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Layout>
     <div>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    
     </div>
    </Layout>
   )
