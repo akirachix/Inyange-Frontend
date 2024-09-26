@@ -25,7 +25,7 @@ const Sidebar = () => {
         </div>
 
       
-        <nav className="flex flex-col px-4 space-y-12 text-base md:text-lg font-medium">
+        <nav className="flex flex-col px-4 space-y-10 text-base md:text-lg font-medium">
           <Link 
             href="/" 
             className={`flex items-center space-x-4 ${activeLink === '/' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
@@ -36,27 +36,27 @@ const Sidebar = () => {
           </Link>
 
           <Link 
-            href="/components/Inventory" 
-            className={`flex items-center space-x-4 ${activeLink === '/components/Inventory' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
-            onClick={() => handleLinkClick('/components/Inventory')}
+            href="/inventory" 
+            className={`flex items-center space-x-4 ${activeLink === '/inventory' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
+            onClick={() => handleLinkClick('/inventory')}
           >
             <FiShoppingCart className="w-6 h-6 md:w-8 md:h-8" />
             <span>Inventory</span>
           </Link>
 
           <Link 
-            href="/Orders" 
-            className={`flex items-center space-x-4 ${activeLink === '/Orders' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
-            onClick={() => handleLinkClick('/Orders')}
+            href="/orders" 
+            className={`flex items-center space-x-4 ${activeLink === '/orders' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
+            onClick={() => handleLinkClick('/orders')}
           >
             <LuClipboardList className="w-6 h-6 md:w-8 md:h-8" />
             <span>Orders</span>
           </Link>
 
           <Link 
-            href="/Payments" 
-            className={`flex items-center space-x-4 ${activeLink === '/Payments' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
-            onClick={() => handleLinkClick('/Payments')}
+            href="/payments" 
+            className={`flex items-center space-x-4 ${activeLink === '/payments' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300`} 
+            onClick={() => handleLinkClick('/payments')}
           >
             <LuCreditCard className="w-6 h-6 md:w-8 md:h-8" />
             <span>Payments</span>
@@ -67,9 +67,9 @@ const Sidebar = () => {
 
       <div className="w-full px-8 mb-6">
               <Link 
-                href="/Logout" 
-                className={`flex items-center space-x-4 py-2 ${activeLink === '/Logout' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300 text-base md:text-lg font-medium`} 
-                onClick={() => handleLinkClick('/Logout')}
+                href="/logout" 
+                className={`flex items-center space-x-4 py-2 ${activeLink === '/logout' ? 'text-[#F8B612]' : 'text-white'} hover:text-[#F8B612] transition-all duration-300 text-base md:text-lg font-medium`} 
+                onClick={() => handleLinkClick('/logout')}
               >
                 <FiLogOut className="w-6 h-6 md:w-8 md:h-8" />
                 <span>Logout</span>
