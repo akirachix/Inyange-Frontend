@@ -1,21 +1,20 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Next.js router for navigation
-import { useForm } from "react-hook-form"; // Form handling
-import { yupResolver } from "@hookform/resolvers/yup"; // Validation resolver for Yup
-import * as yup from "yup"; // Validation schema
-import { FiEye, FiEyeOff } from "react-icons/fi"; // Icons for password visibility toggle
-import { useLogin } from "@/hooks/uselogin";
-import { Credentials } from "@/utils/types";
+import { useRouter } from "next/navigation"; 
+import { useForm } from "react-hook-form"; 
+import { yupResolver } from "@hookform/resolvers/yup"; 
+import * as yup from "yup";
+import { FiEye, FiEyeOff } from "react-icons/fi"; 
+import { useLogin } from "../../hooks/uselogin"; 
+import { Credentials } from "../../utils/types"; 
 
-// Validation schema using Yup
+
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().required("Password is required"),
 });
 
-// Infer the form data type from the Yup schema
 type FormData = yup.InferType<typeof schema>;
 
 const Login = () => {
@@ -41,7 +40,7 @@ const Login = () => {
       const response = await login(credentials); // Use login method from the hook
 
       if (response.success) {
-        router.push("/inventory");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error("Login error:", error);

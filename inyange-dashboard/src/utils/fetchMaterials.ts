@@ -1,6 +1,6 @@
 export const fetchMaterials = async () => {
     try {
-      const response = await fetch('/api/materials');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/materials`);
       if (!response.ok) {
         throw new Error('Failed to fetch materials');
       }
