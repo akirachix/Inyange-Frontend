@@ -8,7 +8,11 @@ interface UserData {
     user_role:string
   }
  
-
+ 
+ 
+ 
+ 
+ 
  const url = '/api/register_user/';
  export const userSignup = async (userData:UserData) => {
     try {

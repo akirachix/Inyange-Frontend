@@ -1,7 +1,8 @@
 
 
 import { useState } from "react";
-import {Credentials} from "../utils/types"
+import { Credentials } from "../utils/types";
+
 
 export const useLogin = () => {
  const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,4 +52,3 @@ export const useLogin = () => {
 
  return { login, isSubmitting, errorMessage, successMessage }; // Return the necessary properties
 };
-

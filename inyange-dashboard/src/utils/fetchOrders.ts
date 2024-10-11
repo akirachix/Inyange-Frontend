@@ -1,5 +1,4 @@
 const baseURL = "/api/orders"
-
 export const fetchOrders = async () =>{
     try{
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orderdetails`);

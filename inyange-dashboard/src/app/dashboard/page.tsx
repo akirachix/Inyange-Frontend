@@ -1,9 +1,9 @@
 "use client";
 import React from 'react';
-import Layout from '../components/Layout';
+// import Layout from '../components/Layout';
 import BarChartComponent from '../components/Barchart/barchart'; 
 import DashboardCard from '../components/DashboardCard/DashboardCard';
-import { useGetOrders } from '../hooks/useGetOrders';
+import { useGetOrders } from '../../hooks/useGetOrders';
 
 const DashboardPage: React.FC = () => {
   const { orders, loading, error } = useGetOrders();

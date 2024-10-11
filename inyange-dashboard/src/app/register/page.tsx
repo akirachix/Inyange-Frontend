@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { userSignup } from '../utils/usersignup';
+import { userSignup } from '../../utils/usersignup';
 
 
 interface UserData {
