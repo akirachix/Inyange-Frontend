@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens:{
+        'nh': {'raw': '(min-width: 1024px) and (max-width: 1279px)'},
+        'nhm': {'raw': '(min-width: 1280px) and (max-width: 1440px)'},
+      }
     },
   },
   plugins: [],
