@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-// import Layout from '../components/Layout';
 import BarChartComponent from "../components/Barchart/barchart";
 import DashboardCard from "../components/DashboardCard/DashboardCard";
 import { useGetOrders } from "../hooks/useGetOrders";
