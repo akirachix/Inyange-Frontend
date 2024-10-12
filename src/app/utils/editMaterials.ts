@@ -1,4 +1,3 @@
-import { MaterialData } from './types';
 
 const baseUrl = '/api/material';
 
