@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+interface RequestData {
+  [key: string]: FormDataEntryValue; 
+}
+
 
 const baseURL = process.env.BASE_URL;
 if (!baseURL) {
@@ -12,7 +16,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
 
     
-    const requestData: any = {};
+    const requestData:  RequestData  = {};
     formData.forEach((value, key) => {
       requestData[key] = value;
     });

@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from "react";
 import { Order } from "../utils/types";
 import { fetchOrder } from "../utils/fetchOrder";
@@ -8,25 +10,38 @@ export const useOrders = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     const getOrders = async () => {
       console.log("Fetching orders...");
+      setLoading(true); 
+      setError(null); 
       try {
         const data = await fetchOrder();
         console.log("Fetched data:", data);
         setOrders(data);
-        setLoading(false);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-        setLoading(false);
+        const errorMessage = err instanceof Error ? err.message : "An error occurred";
+        console.error("Error fetching orders:", errorMessage);
+        setError(errorMessage);
+      } finally {
+        setLoading(false); 
       }
     };
+
     getOrders();
   }, []);
 
-  const fetchOrderDetails = async () => {
+  const fetchOrderDetails = async (orderId: number) => {
+    if (typeof window === 'undefined') {
+      return null; 
+    }
+
     setLoading(true);
     try {
-      const response = await fetch("/api/orderdetails", {
+      const response = await fetch(`/api/orderdetails/${orderId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -38,19 +53,16 @@ export const useOrders = () => {
       }
 
       const orderData = await response.json();
-
-      setOrders(orderData);
-      setLoading(false);
+      return orderData; 
     } catch (err) {
-      console.error("Error fetching order details:", err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : "An error occurred while fetching order details"
-      );
+      const errorMessage = err instanceof Error ? err.message : "An error occurred while fetching order details";
+      console.error("Error fetching order details:", errorMessage);
+      setError(errorMessage);
+    } finally {
       setLoading(false);
     }
   };
 
   return { orders, isLoading, error, fetchOrderDetails };
 };
+
