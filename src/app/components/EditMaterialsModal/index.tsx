@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FaTimes } from "react-icons/fa";
 import { IoCloudUpload } from "react-icons/io5";
 import { MaterialData } from "@/app/utils/types";
 import { editMaterial } from "@/app/utils/editMaterials";
+import Image from 'next/image';
+
 
 const schema = yup.object().shape({
   material_name: yup.string().required("Material name is required"),
@@ -49,7 +51,7 @@ const EditMaterialModal = ({
     reset,
     formState: { errors },
   } = useForm<MaterialData>({
-    resolver: yupResolver(schema) as any,
+    resolver: yupResolver(schema) as unknown as Resolver<MaterialData>,
     defaultValues: materialData || {},
   });
 
@@ -107,10 +109,9 @@ const EditMaterialModal = ({
         onMaterialUpdated(response);
         onClose();
       }
-    } catch (error: any) {
-      setFeedbackMessage(
-        `Failed to update material: ${error.message || "Unknown error"}`
-      );
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      setFeedbackMessage(`Failed to update material: ${errorMessage}`);
       setFeedbackType("error");
     } finally {
       setLoading(false);
@@ -219,11 +220,13 @@ const EditMaterialModal = ({
                   />
                   {imagePreview ? (
                     <div className="relative">
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        className="max-h-24 mx-auto"
-                      />
+                       <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    width={100}
+                    height={100}
+                    className="max-h-24 mx-auto object-contain"
+                  />
                       <button
                         type="button"
                         onClick={removeImage}
