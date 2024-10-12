@@ -23,7 +23,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       status: 200,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'An error occurred' }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'An unknown error occurred' }), {
       status: 500,
     });
   }

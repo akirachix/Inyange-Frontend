@@ -18,7 +18,7 @@ interface BarChartComponentProps {
   yAxisLabel?: string;
 }
 const BarChartComponent: React.FC<BarChartComponentProps> = ({
-  data, xAxisKey, barDataKey, title, barColor = '#8884D8', yAxisLabel,  yAxisLabelFontSize = "12px",
+  data, xAxisKey, barDataKey, title, barColor = '#8884D8', yAxisLabel,
 }) => {
   
   const yAxisTickFormatter = (value: number) => {

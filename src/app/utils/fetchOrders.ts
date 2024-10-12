@@ -1,4 +1,3 @@
-const baseURL = "/api/orders"
 
 export const fetchOrders = async () =>{
     try{
@@ -8,7 +7,7 @@ export const fetchOrders = async () =>{
         }
         return await response.json();
         }catch (error){
-            console.error('Error fetching farmers:', error);
+            console.error('Error fetching orders:', error);
             throw error;
         }
 }

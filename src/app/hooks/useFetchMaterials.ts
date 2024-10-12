@@ -13,7 +13,7 @@ export const useFetchMaterials = () => {
         const data = await response.json();
         setMaterials(data);
         setLoading(false);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch materials");
         setLoading(false);
       }
