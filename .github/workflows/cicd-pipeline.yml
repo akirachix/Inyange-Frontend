@@ -19,26 +19,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
       - name: Install dependencies
         working-directory: ./inyange-dashboard
         run: npm install
-
-      # Set environment variables for the build process
-      - name: Set environment variables
-        run: |
-          echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> $GITHUB_ENV
-
       - name: Build Next.js project
         working-directory: ./inyange-dashboard
         run: npm run build
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -46,29 +36,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Install Vercel CLI
         working-directory: ./inyange-dashboard
         run: npm install --global vercel@latest
-
-      # Pull Vercel environment information
       - name: Pull Vercel Environment Information
         working-directory: ./inyange-dashboard
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      # Set environment variables for the deploy process
-      - name: Set environment variables
-        run: |
-          echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> $GITHUB_ENV
-
       - name: Build Project Artifacts for Vercel
         working-directory: ./inyange-dashboard
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
       - name: Deploy Project Artifacts to Vercel
         working-directory: ./inyange-dashboard
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
       - name: Notify Deployment Success
         run: echo "Deployment to Vercel successful!"

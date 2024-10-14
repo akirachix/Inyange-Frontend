@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+const baseURL = process.env.BASE_URL;  // Change to BASE_URL
 
 export async function GET() {
   try {
