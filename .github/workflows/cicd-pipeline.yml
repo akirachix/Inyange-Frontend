@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         working-directory: ./inyange-dashboard
         run: npm install
-      - name: Debug environment variables
-        run: printenv | grep BASE_URL
-        working-directory: ./inyange-dashboard
       - name: Build Next.js project
         working-directory: ./inyange-dashboard
         run: npm run build
