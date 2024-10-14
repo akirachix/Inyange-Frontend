@@ -1,6 +1,7 @@
 import { MaterialData } from './types';
 
-const url = '/api/materials';
+const baseUrl = '/api/material';
+
 
 export const addMaterial = async (details: MaterialData) => {
   const addForm = (data: MaterialData): FormData => {
@@ -20,7 +21,7 @@ export const addMaterial = async (details: MaterialData) => {
 
   try {
     const formData = addForm(details);
-    const response = await fetch(url, {
+    const response = await fetch(baseUrl, {
       method: 'POST',
       body: formData,
     });
