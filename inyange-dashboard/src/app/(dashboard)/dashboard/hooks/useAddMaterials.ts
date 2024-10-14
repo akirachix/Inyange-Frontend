@@ -1,6 +1,7 @@
-import { MaterialData } from "../../app/utils/types";
 import { useState } from "react";
-import { addMaterial } from "../../app/utils/addMaterials";
+import { addMaterial } from "../utils/addMaterials";
+import { MaterialData } from "../utils/types";
+
 
 export const useAddMaterials = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

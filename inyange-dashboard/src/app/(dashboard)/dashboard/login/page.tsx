@@ -39,7 +39,7 @@ const Login = () => {
       const response = await login(credentials); // Use login method from the hook
 
       if (response.success) {
-        router.push("/dashboard");
+        router.push("/dashboard/dashboard");
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -144,7 +144,7 @@ const Login = () => {
 
           <p className="mt-6 text-center text-sm lg:text-base text-gray-600">
             Don&apos;t have an account?
-            <a href="/register" className="text-blue-600 hover:underline">
+            <a href="/dashboard/register" className="text-blue-600 hover:underline font-semibold">
               Sign Up
             </a>
           </p>

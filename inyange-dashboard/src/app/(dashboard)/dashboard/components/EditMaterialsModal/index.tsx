@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FaTimes } from "react-icons/fa";
 import { IoCloudUpload } from "react-icons/io5";
-import { MaterialData } from "@/app/utils/types";
-import { editMaterial } from "@/app/utils/editMaterials";
+import { editMaterial } from "../../utils/editMaterials";
 import Image from 'next/image';
+import { MaterialData } from "../../utils/types";
 
 
 const schema = yup.object().shape({

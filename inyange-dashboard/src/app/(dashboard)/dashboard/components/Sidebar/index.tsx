@@ -24,7 +24,7 @@ const Sidebar = () => {
 
       <nav className="flex flex-col space-y-14 mt-[130px] ml-[70px] font-bold nh:mt-[80px] nh:ml-[40px] nh:space-y-10 nhm:mt-[100px] nhm:ml-[50px] nhm:space-y-12">
         <Link
-          href="/dashboard"
+          href="/dashboard/dashboard"
           className={`flex items-center space-x-4 ${
             activeLink === "/" ? "text-[#F8B612]" : "text-white"
           } hover:text-[#F8B612] transition-all duration-300`}
@@ -35,7 +35,7 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          href="/inventory"
+          href="/dashboard/inventory"
           className={`flex items-center space-x-4 ${
             activeLink === "/inventory" ? "text-[#F8B612]" : "text-white"
           } hover:text-[#F8B612] transition-all duration-300`}
@@ -46,7 +46,7 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          href="/order"
+          href="/dashboard/order"
           className={`flex items-center space-x-4 ${
             activeLink === "/order" ? "text-[#F8B612]" : "text-white"
           } hover:text-[#F8B612] transition-all duration-300`}
@@ -57,7 +57,7 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          href="/register"
+          href="/dashboard/register"
           className={`flex items-center space-x-4 ${
             activeLink === "/logout" ? "text-[#F8B612]" : "text-white"
           } hover:text-[#F8B612] transition-all duration-300`}

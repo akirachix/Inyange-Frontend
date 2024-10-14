@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { MaterialData } from "@/app/utils/types";
+import { MaterialData } from "../utils/types";
+
 
 export const useMaterial = (materialId: string) => {
   const [material, setMaterial] = useState<MaterialData | null>(null);

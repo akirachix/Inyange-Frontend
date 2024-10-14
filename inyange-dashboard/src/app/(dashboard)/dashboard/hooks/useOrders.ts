@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import { Order } from "../utils/types";
 import { fetchOrder } from "../utils/fetchOrder";

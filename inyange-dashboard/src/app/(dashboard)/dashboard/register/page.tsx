@@ -242,8 +242,8 @@ const SignUpForm = () => {
           <p className="mt-6 lg:mt-8 text-center text-sm lg:text-base text-gray-600">
             Already have an account?{" "}
             <Link
-              href="/login"
-              className="font-medium text-blue-600 hover:text-blue-800 transition-colors duration-300"
+              href="/dashboard/login"
+              className="font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-300"
             >
               Login
             </Link>

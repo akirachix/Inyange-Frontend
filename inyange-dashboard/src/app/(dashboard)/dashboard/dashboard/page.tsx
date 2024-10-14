@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-// import Layout from '../components/Layout';
 import BarChartComponent from "../components/Barchart/barchart";
 import DashboardCard from "../components/DashboardCard/DashboardCard";
 import { useGetOrders } from "../hooks/useGetOrders";
@@ -82,45 +81,45 @@ const DashboardPage: React.FC = () => {
 
   return (
     <Layout>
-    <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-[70px]">
-      <div className="flex justify-center">
-        <h1 className="text-center text-xl md:text-4xl font-bold mt-8 mb-4">
-          Dashboard
-        </h1>
-      </div>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-[70px]">
+        <div className="flex justify-center">
+          <h1 className="text-center text-xl md:text-4xl font-bold mt-8 mb-4">
+            Dashboard
+          </h1>
+        </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10 ">
-        <DashboardCard
-          title="Total Revenue"
-          value={`KES ${totalRevenue.toLocaleString()}`}
-        />
-        <DashboardCard
-          title="Brands Bought"
-          value={brandsBought.toLocaleString()}
-        />
-      </div>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10 ">
+          <DashboardCard
+            title="Total Revenue"
+            value={`KES ${totalRevenue.toLocaleString()}`}
+          />
+          <DashboardCard
+            title="Brands Bought"
+            value={brandsBought.toLocaleString()}
+          />
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-10 ">
-        <BarChartComponent
-          data={revenueData}
-          xAxisKey="month"
-          barDataKey="revenue"
-          title="Total Revenue per Month"
-          yAxisLabel="Total revenue per month"
-          yAxisLabelFontSize="40px"
-          barColor="#577399"
-        />
-        <BarChartComponent
-          data={brandsData}
-          xAxisKey="brand"
-          barDataKey="count"
-          title="Number of Frequently Bought Brands"
-          yAxisLabel="Number of brands bought"
-          yAxisLabelFontSize="40px "
-          barColor="#577399"
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-10 ">
+          <BarChartComponent
+            data={revenueData}
+            xAxisKey="month"
+            barDataKey="revenue"
+            title="Total Revenue per Month"
+            yAxisLabel="Total revenue per month"
+            yAxisLabelFontSize="40px"
+            barColor="#577399"
+          />
+          <BarChartComponent
+            data={brandsData}
+            xAxisKey="brand"
+            barDataKey="count"
+            title="Number of Frequently Bought Brands"
+            yAxisLabel="Number of brands bought"
+            yAxisLabelFontSize="40px "
+            barColor="#577399"
+          />
+        </div>
       </div>
-    </div>
     </Layout>
   );
 };

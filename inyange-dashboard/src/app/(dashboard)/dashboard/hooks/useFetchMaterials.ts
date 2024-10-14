@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { MaterialData } from "@/app/utils/types";
+import { MaterialData } from "../utils/types";
+
 
 export const useFetchMaterials = () => {
   const [materials, setMaterials] = useState<MaterialData[]>([]);

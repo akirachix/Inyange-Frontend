@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useFetchMaterials } from "@/app/hooks/useFetchMaterials";
 import AddMaterialModal from "../components/AddMaterialsForm";
 import EditMaterialForm from "../components/EditMaterialsModal";
 import { FaPlus, FaPencilAlt } from "react-icons/fa";
-import { MaterialData } from "@/app/utils/types";
 import Layout from "../components/Layout";
 import Image from "next/image";
+import { useFetchMaterials } from "../hooks/useFetchMaterials";
+import { MaterialData } from "../utils/types";
 
 const InventoryPage: React.FC = () => {
   const { materials, loading, error, setMaterials } = useFetchMaterials();

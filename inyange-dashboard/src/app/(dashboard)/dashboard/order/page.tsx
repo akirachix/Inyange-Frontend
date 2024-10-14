@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
 import { useOrders } from "../hooks/useOrders";
-import { Order } from "../utils/types";
 import { useSearchParams } from "next/navigation";
 import OrderDetailModal from "../components/OrderDetailModal";
 import Layout from "../components/Layout";
+import { Order } from "../utils/types";
 
 const Orders = () => {
   const { orders, isLoading, error } = useOrders();
@@ -26,7 +26,7 @@ const Orders = () => {
       </div>
     );
   }
-  
+
   if (error) {
     return (
       <div className="flex justify-center items-center h-screen text-3xl ml-[550px] nh:ml-[300px] nhm:ml-[400px]">
@@ -83,7 +83,10 @@ const Orders = () => {
               <tbody>
                 {currentOrders.map((order: Order) =>
                   Object.entries(order.cart_data).map(([itemNumber, item]) => (
-                    <tr key={`${order.order_id}-${itemNumber}`} className="hover:bg-gray-50">
+                    <tr
+                      key={`${order.order_id}-${itemNumber}`}
+                      className="hover:bg-gray-50"
+                    >
                       <td className="border px-10 py-4 text-[15px] font-normal nh:px-12 nh:py-3 nh:text-[14px] nh:whitespace-nowrap nhm:px-16 nhm:py-3 nhm:text-[15px]">
                         {item.brand_name}
                       </td>
@@ -93,15 +96,20 @@ const Orders = () => {
                       <td className="border px-10 py-5 text-[15px] font-normal nh:px-8 nh:py-3 nh:text-[14px] nhm:px-16 nhm:py-3 nhm:text-[15px]">
                         {new Date(order.order_date).toLocaleDateString()}
                       </td>
-                      <td className={`border px-4 py-2 text-[15px] font-medium nh:px-2 nh:py-2 nh:text-[14px] nh:whitespace-nowrap nhm:px-3 nhm:py-2 nhm:text-[15px] ${
+                      <td
+                        className={`border px-4 py-2 text-[15px] font-medium nh:px-2 nh:py-2 nh:text-[14px] nh:whitespace-nowrap nhm:px-3 nhm:py-2 nhm:text-[15px] ${
                           order.status.trim().toLowerCase() === "delivered"
                             ? "text-green-600"
                             : "text-red-500"
-                      }`}>
+                        }`}
+                      >
                         {order.status}
                       </td>
                       <td className="border px-4 py-2 text-[15px] font-normal nh:px-3 nh:py-2 nh:text-[14px] nhm:px-3 nhm:py-2 nhm:text-[15px]">
-                        <button onClick={() => handleOpenModal(order.order_id)} className="bg-[#F8B612] hover:bg-[#263C5A] text-white font-bold py-2 px-4 rounded nh:py-2 nh:whitespace-nowrap nh:px-2 nh:text-[14px] nhm:py-1 nhm:px-3 nhm:text-[15px]">
+                        <button
+                          onClick={() => handleOpenModal(order.order_id)}
+                          className="bg-[#F8B612] hover:bg-[#263C5A] text-white font-bold py-2 px-4 rounded nh:py-2 nh:whitespace-nowrap nh:px-2 nh:text-[14px] nhm:py-1 nhm:px-3 nhm:text-[15px]"
+                        >
                           View order
                         </button>
                       </td>
@@ -113,24 +121,41 @@ const Orders = () => {
           </div>
         </div>
         <div className="flex justify-center items-center space-x-2 pb-8 ml-[70%] mb-[30px] nh:ml-[60%] nhm:ml-[65%]">
-          <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 border rounded hover:bg-gray-100 disabled:opacity-50 nh:px-3 nh:py-1 nh:text-[14px] nhm:px-3 nhm:py-1 nhm:text-[15px]">
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 border rounded hover:bg-gray-100 disabled:opacity-50 nh:px-3 nh:py-1 nh:text-[14px] nhm:px-3 nhm:py-1 nhm:text-[15px]"
+          >
             &lt;
           </button>
 
           {Array.from({ length: totalPages }, (_, index) => (
-            <button key={index + 1} onClick={() => paginate(index + 1)} className={`px-9 py-2 border rounded hover:bg-[#263C5A] nh:px-6 nh:py-1 nh:text-[14px] nhm:px-7 nhm:py-1 nhm:text-[15px] ${
-                currentPage === index + 1 ? "bg-[#F8B612] text-white text-[18px] font-semibold nh:text-[14px] nhm:text-[15px]" : ""
-            }`}>
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`px-9 py-2 border rounded hover:bg-[#263C5A] nh:px-6 nh:py-1 nh:text-[14px] nhm:px-7 nhm:py-1 nhm:text-[15px] ${
+                currentPage === index + 1
+                  ? "bg-[#F8B612] text-white text-[18px] font-semibold nh:text-[14px] nhm:text-[15px]"
+                  : ""
+              }`}
+            >
               {index + 1}
             </button>
           ))}
 
-          <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 border rounded hover:bg-gray-100 disabled:opacity-50 nh:px-3 nh:py-1 nh:text-[14px] nhm:px-3 nhm:py-1 nhm:text-[15px]">
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 border rounded hover:bg-gray-100 disabled:opacity-50 nh:px-3 nh:py-1 nh:text-[14px] nhm:px-3 nhm:py-1 nhm:text-[15px]"
+          >
             &gt;
           </button>
         </div>
         {isModalOpen && (
-          <OrderDetailModal orderId={selectedOrderId} onClose={handleCloseModal} />
+          <OrderDetailModal
+            orderId={selectedOrderId}
+            onClose={handleCloseModal}
+          />
         )}
       </div>
     </Layout>
