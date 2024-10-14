@@ -1,19 +1,20 @@
-
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 interface RequestData {
   [key: string]: FormDataEntryValue;
 }
 
-const baseUrl = process.env.BASE_URL
+const baseUrl = process.env.BASE_URL;
 
+export async function POST(request: Request) {
+  if (!baseUrl) {
+    console.error("BASE_URL is not defined.");
+    return NextResponse.json(
+      { error: "BASE_URL is not defined" },
+      { status: 500 }
+    );
+  }
 
-if (!baseUrl) {
-  console.error("BASE_URL is not defined.");
-  throw new Error("BASE_URL is not defined");
-}
-
-export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const requestData: RequestData = {};
@@ -49,6 +50,14 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
+  if (!baseUrl) {
+    console.error("BASE_URL is not defined.");
+    return NextResponse.json(
+      { error: "BASE_URL is not defined" },
+      { status: 500 }
+    );
+  }
+
   try {
     const response = await fetch(`${baseUrl}/api/materials/`);
     if (!response.ok) {
