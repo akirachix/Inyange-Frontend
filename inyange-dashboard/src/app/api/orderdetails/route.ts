@@ -1,10 +1,12 @@
+
 import { NextResponse } from 'next/server';
 
-const baseURL = process.env.BASE_URL;  // Change to BASE_URL
+const baseURL = process.env.BASE_URL;
 
 export async function GET() {
   try {
     const response = await fetch(`${baseURL}/api/orderdetails`);
+
     
     if (!response.ok) {
       const errorText = await response.text(); 
