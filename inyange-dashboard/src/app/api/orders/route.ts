@@ -1,30 +1,34 @@
 import { NextResponse } from 'next/server';
+import { Order } from '@/app/utils/types'; // Adjust the import path based on your project structure
 
-const baseURL = process.env.BASE_URL;
+// Static data for testing
+const staticOrders: Order[] = [
+  {
+    total_price: '100',
+    totalAmount: 1,
+    customerName: 'John Doe',
+    order_id: 1,
+    itemNumber: 2,
+    order_date: '2024-10-14',
+    status: 'Completed',
+    cart_data: {}, // Add your CartItem data here if needed
+    material: 1,
+  },
+  {
+    total_price: '200',
+    totalAmount: 2,
+    customerName: 'Jane Smith',
+    order_id: 2,
+    itemNumber: 3,
+    order_date: '2024-10-13',
+    status: 'Pending',
+    cart_data: {}, // Add your CartItem data here if needed
+    material: 2,
+  },
+  // You can add more static orders if necessary
+];
 
 export async function GET() {
-  try {
-    const response = await fetch(`${baseURL}/api/orderdetails`);
-    
-    
-    if (!response.ok) {
-      const errorText = await response.text(); 
-      return NextResponse.json({ error: 'Failed to fetch order details: ' + errorText }, { status: response.status });
-    }
-
-    
-    const orders = await response.json();
-    
-    
-    return NextResponse.json(orders);
-    
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    
-    
-    return NextResponse.json(
-      { error: 'Failed to fetch orders: ' + (error instanceof Error ? error.message : 'Unknown error') },
-      { status: 500 }
-    );
-  }
+  // Instead of fetching, we return the static data
+  return NextResponse.json(staticOrders);
 }

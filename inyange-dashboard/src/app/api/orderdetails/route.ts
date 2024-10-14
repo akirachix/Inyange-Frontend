@@ -1,18 +1,10 @@
-
 import { NextResponse } from 'next/server';
 
-const baseURL = process.env.BASE_URL;
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function GET() {
   try {
-    const response = await fetch(`${baseURL}/api/orderdetails/`, {
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
-    });
+    const response = await fetch(`${baseURL}/api/orderdetails`);
     
     if (!response.ok) {
       const errorText = await response.text(); 
