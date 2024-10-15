@@ -1,6 +1,6 @@
 export interface Credentials{
-    email:String;
-    password:String;
+    email:string;
+    password:string;
 }
 export interface MaterialData {
     material_id: number;
@@ -13,3 +13,4 @@ export interface MaterialData {
     image: File | null;
     category: string; 
   }
+  

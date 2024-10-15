@@ -7,6 +7,7 @@ import { usePayment } from "../../hooks/payment";
 import Link from "next/link";
 import { MaterialData } from "../../utils/types";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import Image from "next/image";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
@@ -54,7 +55,7 @@ const CartPage = () => {
                 <ChevronLeft size={24} />
               </button>
             </Link>
-            <img
+            <Image
               src="/images/bmLogo.png"
               alt="BuildMart Logo"
               className="h-8 sm:h-10"
