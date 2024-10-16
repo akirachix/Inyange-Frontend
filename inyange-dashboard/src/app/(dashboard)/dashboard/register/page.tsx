@@ -21,6 +21,7 @@ interface UserData {
   location: string; // Ensure to include the new field if it's used
 }
 
+
 const signupSchema = yup.object().shape({
   first_name: yup.string().required("First Name is required"),
   last_name: yup.string().required("Last Name is required"),
