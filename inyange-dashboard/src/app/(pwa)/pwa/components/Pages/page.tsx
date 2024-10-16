@@ -56,13 +56,10 @@ const CartPage = () => {
               </button>
             </Link>
             <Image
-  src="/images/bmLogo.png"
-  alt="BuildMart Logo"
-  className="h-8 sm:h-10"
-  width={200} 
-  height={50} 
-/>
-
+              src="/images/bmLogo.png"
+              alt="BuildMart Logo"
+              className="h-8 sm:h-10"
+            />
           </div>
           <div className="relative">
             <MdOutlineShoppingCart className="text-gray-600" size={24} />
