@@ -46,7 +46,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className=" min-h-screen md:text-2xl bg-gray-100 flex flex-col">
       <header className="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 fixed top-0 left-0 right-0 z-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center">
@@ -56,10 +56,13 @@ const CartPage = () => {
               </button>
             </Link>
             <Image
-              src="/images/bmLogo.png"
-              alt="BuildMart Logo"
-              className="h-8 sm:h-10"
-            />
+  src="/images/bmLogo.png"
+  alt="BuildMart Logo"
+  className="h-8 sm:h-10"
+  width={100}  // Replace with the actual width of your image
+  height={50}  // Replace with the actual height of your image
+/>
+
           </div>
           <div className="relative">
             <MdOutlineShoppingCart className="text-gray-600" size={24} />
@@ -71,7 +74,12 @@ const CartPage = () => {
       </header>
 
       <main className="flex-grow mt-16 sm:mt-20 p-4 sm:p-6 lg:p-8">
-        <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className=" text-lg sm:text-xl md:text-2xl
+
+
+
+
+max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-4 sm:p-6 lg:p-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-900">Shopping Cart</h1>
 
@@ -139,6 +147,8 @@ const CartPage = () => {
                     placeholder="Amount"
                     className="w-full p-2 sm:p-3 mb-4 border rounded-lg text-black placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
                     // value={`KES ${totalPrice}`}
+                    value={phoneNumber}
+
                     // readOnly
                   />
                   <input
