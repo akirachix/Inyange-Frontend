@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-// import { fetchMaterials } from '../utils/fetchMaterials';
 import { fetchMaterials } from '../utils/fetchMaterials';
 
 // Named export
