@@ -9,3 +9,5 @@ export interface MaterialData {
     image: File | null;
     category: string; 
   }
+
+  
