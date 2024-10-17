@@ -1,7 +1,7 @@
 {
-    "name": "Bheta",
-    "short_name": "Bheta",
-    "description": "Bheta: Health",
+    "name": "Build",
+    "short_name": "Build",
+    "description": "Build: Mart",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#FFFFFF",
