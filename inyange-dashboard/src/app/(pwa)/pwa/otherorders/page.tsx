@@ -90,7 +90,7 @@ const OtherOrders = () => {
       <div className="flex items-center w-full px-4 sm:px-8 lg:px-16 xl:px-24">
         <div className="flex items-center lg:ml-[-18%] xl:ml-[-330px]">
           <Link
-            href="/components/Home"
+            href="/pwa/components/Homepage"
             className="mr-4 sm:mr-6 lg:mr-8 mt-5 text-blue-950"
           >
             <FiChevronLeft size={40} className="lg:w-[50px]" />
@@ -196,8 +196,8 @@ const OtherOrders = () => {
         </div>
 
         <Link
-          href="/pwa/checkout"
-          className="mt-4 sm:mt-0 sm:ml-auto py-2 px-4 lg:px-6 lg:py-3 lg:text-xl sm:text-2xl lg:text-3xl lg:ml-[20px] xl:text-[23px] font-semibold bg-[#F8B612] transition-colors xl:ml-[30px] rounded-lg"
+          href="/pwa/components/Pages"
+          className="mt-4 sm:mt-0 sm:ml-auto py-2 px-4 lg:px-6 lg:py-3 sm:text-2xl lg:text-3xl lg:ml-[20px] xl:text-[23px] font-semibold bg-[#F8B612] transition-colors xl:ml-[30px] rounded-lg"
         >
           Checkout
         </Link>
