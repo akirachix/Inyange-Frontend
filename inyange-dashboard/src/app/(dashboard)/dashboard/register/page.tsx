@@ -18,7 +18,7 @@ interface UserData {
   username: string;
   phone_number: string;
   user_role: string;
-  location: string; // Ensure to include the new field if it's used
+  location: string;
 }
 
 const signupSchema = yup.object().shape({
@@ -52,7 +52,6 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    //  reset,
   } = useForm({
     resolver: yupResolver(signupSchema),
     mode: "onBlur",
@@ -64,7 +63,6 @@ const SignUpForm = () => {
       const response = await userSignup(data);
 
       if (response && response.error) {
-        // Log the error for debugging purposes
         console.error("Registration Error:", response.error);
         setErrorMessage(response.error);
       } else {
@@ -240,7 +238,7 @@ const SignUpForm = () => {
             )}
           </form>
           <p className="mt-6 lg:mt-8 text-center text-sm lg:text-base text-gray-600">
-            Already have an account?{" "}
+            Already have an account?
             <Link
               href="/dashboard/login"
               className="font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-300"
