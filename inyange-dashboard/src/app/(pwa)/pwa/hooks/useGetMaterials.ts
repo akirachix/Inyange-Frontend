@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-// import { fetchMaterials} from '../utils/fetchMaterials';
 import { fetchMaterials } from '../utils/fetchMaterials';
 
 export interface Material {
     id: number;        
     name: string; 
     material_name: string;     
-    // image: string;     
     price: number;     
   }
 

@@ -1,13 +1,12 @@
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronLeft, Minus, Plus } from "lucide-react";
-import { usePayment } from "../../hooks/payment";
 import Link from "next/link";
-import { MaterialData } from "../../utils/types";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { MaterialData } from "../../utils/types";
+import { usePayment } from "../../hooks/payment";
 import Image from "next/image";
+
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
@@ -19,9 +18,9 @@ const CartPage = () => {
     if (items) {
       try {
         const parsedItems = JSON.parse(items);
-        setCartItems(parsedItems);
+        setCartItems(parsedItems); 
       } catch (error) {
-        console.error('Error parsing cart items:', error);
+        console.error('Error parsing cart items:', error); 
       }
     }
   }, []);
@@ -46,127 +45,127 @@ const CartPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 fixed top-0 left-0 right-0 z-10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/components/Steel">
-              <button className="text-gray-800 transition-colors mr-4">
-                <ChevronLeft size={24} />
-              </button>
-            </Link>
-            <Image
-              src="/images/bmLogo.png"
-              alt="BuildMart Logo"
-              className="h-8 sm:h-10"
-            />
-          </div>
-          <div className="relative">
-            <MdOutlineShoppingCart className="text-gray-600" size={24} />
-            {/* <span className="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
-              {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-            </span> */}
-          </div>
+    <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-12">
+      <header className="flex items-center mb-8">
+      <Link href="/pwa/components/Steel">
+            <button className="text-gray-800 transition-colors">
+                <ChevronLeft size={50}  className="xl:mt-[25px]"/>
+            </button>
+        </Link>
+        <div className="flex items-center ml-4">
+        <Image
+            src="/images/bmLogo.png"
+            alt="BuildMart Logo"
+            width={160}
+            height={32}
+            className="w-40 sm:w-48 lg:w-[100%] xl:w-[83%] xl:ml-[-25px]"
+          />
+          <span className="font-bold text-2xl text-blue-900"></span>
+        </div>
+        <div className="ml-auto relative">
+          <MdOutlineShoppingCart className="text-gray-600" size={36} />
+          <span className="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+          </span>
         </div>
       </header>
 
-      <main className="flex-grow mt-16 sm:mt-20 p-4 sm:p-6 lg:p-8">
-        <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-4 sm:p-6 lg:p-8">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-900">Shopping Cart</h1>
+      <main className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="p-8 lg:p-12">
+          <h1 className="text-[28px] font-bold mb-8 text-blue-900">Shopping Cart</h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <div className="overflow-x-auto">
-                  <table className="w-full mb-6">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/2">Product</th>
-                        <th className="text-left pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/4">Quantity</th>
-                        <th className="text-right pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/4">Total Price</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.map((item) => (
-                        <tr key={item.material_id} className="border-b border-gray-200">
-                          <td className="py-4">
-                            <div>
-                              <p className="font-bold text-sm sm:text-base text-blue-900">{item.material_name}</p>
-                              <p className="text-xs sm:text-sm mt-1 text-gray-600">
-                                Brand: {item.brand_name}
-                              </p>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="flex items-center border rounded-md w-24 sm:w-32 shadow-sm">
-                              <button 
-                                className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-gray-100 transition-colors"
-                                onClick={() => handleQuantityChange(item.material_id, false)}
-                              >
-                                <Minus size={14} />
-                              </button>
-                              <span className="px-2 sm:px-3 py-1 sm:py-2 flex-grow text-center font-semibold text-sm sm:text-base">
-                                {item.quantity}
-                              </span>
-                              <button 
-                                className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-gray-100 transition-colors"
-                                onClick={() => handleQuantityChange(item.material_id, true)}
-                              >
-                                <Plus size={14} />
-                              </button>
-                            </div>
-                          </td>
-                          <td className="text-right font-bold text-sm sm:text-base text-blue-900">KES {item.price * item.quantity}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <Link href="/otherorder">
-                  <button className="flex items-center bg-yellow-500 text-blue-900 font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-xs sm:text-sm">
-                    <ChevronLeft className="mr-1 sm:mr-2" size={16} />
-                    Continue Shopping
-                  </button>
-                </Link>
-              </div>
+          <div className="flex flex-col xl:flex-row gap-12">
+            <div className="flex-grow">
+              <table className="w-[90%] mb-8">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">Product</th>
+                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">Quantity</th>
+                    <th className="text-right pb-4 text-blue-900 font-semibold text-[20px]">Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartItems.map((item) => (
+                    <tr key={item.material_id} className="border-b border-gray-200">
+                      <td className="py-6">
+                        <div className="flex items-center">
+                       
+                          <div>
+                            <p className="font-bold text-xl text-blue-900 text-[20px]">{item.material_name}</p>
+                            <p className="text-[16px] mt-1">
+                              Brand: {item.brand_name}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center border rounded-md w-36 shadow-sm">
+                          <button 
+                            className="px-4 py-2 hover:bg-gray-100 transition-colors"
+                            onClick={() => handleQuantityChange(item.material_id, false)}
+                          >
+                            <Minus size={18} />
+                          </button>
+                          <span className="px-4 py-2 flex-grow text-center font-semibold text-lg">
+                            {item.quantity}
+                          </span>
+                          <button 
+                            className="px-4 py-2 hover:bg-gray-100 transition-colors"
+                            onClick={() => handleQuantityChange(item.material_id, true)}
+                          >
+                            <Plus size={18} />
+                          </button>
+                        </div>
+                      </td>
+                      <td className="text-right font-bold text-xl text-blue-900">KES {item.price * item.quantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Link href="/pwa/otherorders">
+                <button className="flex items-center bg-yellow-500 text-blue-900 font-bold px-8 py-4 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-[16px]">
+                  <ChevronLeft className="mr-2" size={24} />
+                  Continue Shopping
+                </button>
+              </Link>
+            </div>
 
-              <div className="lg:sticky lg:top-24 lg:self-start">
-                <div className="bg-[#263C5A] p-4 sm:p-6 rounded-xl text-white shadow-lg">
-                  <h2 className="text-lg sm:text-xl font-bold mb-4">Order Summary</h2>
-                  <p className="mb-3 font-semibold text-sm sm:text-base">Payment Method</p>
-                  <input
-                    type="text"
-                    placeholder="Amount"
-                    className="w-full p-2 sm:p-3 mb-4 border rounded-lg text-black placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                    // value={`KES ${totalPrice}`}
-                    // readOnly
-                  />
-                  <input
-                    type="text"
-                    placeholder="Enter Phone Number"
-                    className="w-full p-2 sm:p-3 mb-4 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                  <div className="flex justify-between mb-2 text-sm">
-                    <span>Subtotal:</span>
-                    <span>KES {totalPrice}</span>
-                  </div>
-                  <div className="flex justify-between font-bold mb-4 text-sm">
-                    <span>Total:</span>
-                    <span>KES {totalPrice}</span>
-                  </div>
-                  
-                  <button 
-                    className="w-full bg-yellow-500 text-blue-900 font-bold px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-sm"
-                    onClick={handlePayment} 
-                    disabled={isSubmitting} 
-                  >
-                    {isSubmitting ? 'Processing...' : 'Pay Now'}
-                  </button>
-                  {errorMessage && <p className="text-red-500 mt-3 text-xs sm:text-sm">{errorMessage}</p>}
-                  {successMessage && <p className="text-green-500 mt-3 text-xs sm:text-sm">{successMessage}</p>}
+            <div className="w-full xl:w-1/3 xl:mt-[-50px]">
+              <div className="bg-[#263C5A] pl-20 pr-20 pt-[100px] pb-[100px] rounded-xl text-white shadow-lg">
+                <h2 className="text-[25px] font-bold mb-6">Order Summary</h2>
+                <p className="mb-6 font-semibold text-[20px]">Payment Method</p>
+                <input
+                  type="text"
+                  placeholder="Amount"
+                  className="w-full p-4 mb-10 border rounded-lg text-black placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                  value={totalPrice}
+                  readOnly
+                />
+                <input
+                  type="text"
+                  placeholder="Enter Phone Number"
+                  className="w-full p-4 mb-12 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+                <div className="flex justify-between mb-4 text-[17px]">
+                  <span>Subtotal:</span>
+                  <span>KES {totalPrice}</span>
                 </div>
+                <div className="flex justify-between font-bold mb-8 text-[17px]">
+                  <span>Total:</span>
+                  <span>KES {totalPrice}</span>
+                </div>
+                
+                <button 
+                  className="w-full bg-yellow-500 text-blue-900 font-bold px-6 py-4 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-[17px] xl:mt-[30px]"
+                  onClick={handlePayment} 
+                  disabled={isSubmitting} 
+                >
+                  {isSubmitting ? 'Processing...' : 'Pay Now'}
+                </button>
+                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+                {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
               </div>
             </div>
           </div>
@@ -177,190 +176,6 @@ const CartPage = () => {
 };
 
 export default CartPage;
-// "use client";
-// import React, { useEffect, useState } from "react";
-// import { ChevronLeft, Minus, Plus } from "lucide-react";
-// import { usePayment } from "../../hooks/payment";
-// import Link from "next/link";
-// import { MaterialData } from "../../utils/types";
-// import { MdOutlineShoppingCart } from "react-icons/md";
 
-// const CartPage = () => {
-//   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
-//   const [phoneNumber, setPhoneNumber] = useState("");
-//   const [paymentAmount, setPaymentAmount] = useState(""); // New state for user input amount
-//   const { processPayment, isSubmitting, errorMessage, successMessage } = usePayment();
 
-//   useEffect(() => {
-//     const items = localStorage.getItem('cart');
-//     if (items) {
-//       try {
-//         const parsedItems = JSON.parse(items);
-//         setCartItems(parsedItems);
-//       } catch (error) {
-//         console.error('Error parsing cart items:', error);
-//       }
-//     }
-//   }, []);
 
-//   const handleQuantityChange = (id: number, increment: boolean) => {
-//     setCartItems(prevItems =>
-//       prevItems.map(item =>
-//         item.material_id === id
-//           ? { ...item, quantity: increment ? item.quantity + 1 : Math.max(item.quantity - 1, 1) }
-//           : item
-//       )
-//     );
-//   };
-
-//   const totalPrice = cartItems.reduce(
-//     (sum, item) => sum + item.price * item.quantity,
-//     0
-//   );
-
-//   const handlePayment = async () => {
-//     // Ensure the user enters a valid payment amount
-//     if (Number(paymentAmount) <= 0 || isNaN(Number(paymentAmount))) {
-//       alert("Please enter a valid amount.");
-//       return;
-//     }
-//     await processPayment(paymentAmount, phoneNumber);
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 flex flex-col">
-//       <header className="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 fixed top-0 left-0 right-0 z-10">
-//         <div className="max-w-7xl mx-auto flex items-center justify-between">
-//           <div className="flex items-center">
-//             <Link href="/components/Steel">
-//               <button className="text-gray-800 transition-colors mr-4">
-//                 <ChevronLeft size={24} />
-//               </button>
-//             </Link>
-//             <img
-//               src="/images/bmLogo.png"
-//               alt="BuildMart Logo"
-//               className="h-8 sm:h-10"
-//             />
-//           </div>
-//           <div className="relative">
-//             <MdOutlineShoppingCart className="text-gray-600" size={24} />
-//           </div>
-//         </div>
-//       </header>
-
-//       <main className="flex-grow mt-16 sm:mt-20 p-4 sm:p-6 lg:p-8">
-//         <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-//           <div className="p-4 sm:p-6 lg:p-8">
-//             <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-900">Shopping Cart</h1>
-
-//             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-//               <div className="lg:col-span-2">
-//                 <div className="overflow-x-auto">
-//                   <table className="w-full mb-6">
-//                     <thead>
-//                       <tr className="border-b border-gray-200">
-//                         <th className="text-left pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/2">Product</th>
-//                         <th className="text-left pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/4">Quantity</th>
-//                         <th className="text-right pb-4 text-blue-900 font-semibold text-sm sm:text-base w-1/4">Total Price</th>
-//                       </tr>
-//                     </thead>
-//                     <tbody>
-//                       {cartItems.map((item) => (
-//                         <tr key={item.material_id} className="border-b border-gray-200">
-//                           <td className="py-4">
-//                             <div>
-//                               <p className="font-bold text-sm sm:text-base text-blue-900">{item.material_name}</p>
-//                               <p className="text-xs sm:text-sm mt-1 text-gray-600">
-//                                 Brand: {item.brand_name}
-//                               </p>
-//                             </div>
-//                           </td>
-//                           <td>
-//                             <div className="flex items-center border rounded-md w-24 sm:w-32 shadow-sm">
-//                               <button 
-//                                 className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-gray-100 transition-colors"
-//                                 onClick={() => handleQuantityChange(item.material_id, false)}
-//                               >
-//                                 <Minus size={14} />
-//                               </button>
-//                               <span className="px-2 sm:px-3 py-1 sm:py-2 flex-grow text-center font-semibold text-sm sm:text-base">
-//                                 {item.quantity}
-//                               </span>
-//                               <button 
-//                                 className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-gray-100 transition-colors"
-//                                 onClick={() => handleQuantityChange(item.material_id, true)}
-//                               >
-//                                 <Plus size={14} />
-//                               </button>
-//                             </div>
-//                           </td>
-//                           <td className="text-right font-bold text-sm sm:text-base text-blue-900">KES {item.price * item.quantity}</td>
-//                         </tr>
-//                       ))}
-//                     </tbody>
-//                   </table>
-//                 </div>
-//                 <Link href="/otherorder">
-//                   <button className="flex items-center bg-yellow-500 text-blue-900 font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-xs sm:text-sm">
-//                     <ChevronLeft className="mr-1 sm:mr-2" size={16} />
-//                     Continue Shopping
-//                   </button>
-//                 </Link>
-//               </div>
-
-//               <div className="lg:sticky lg:top-24 lg:self-start">
-//                 <div className="bg-[#263C5A] p-4 sm:p-6 rounded-xl text-white shadow-lg">
-//                   <h2 className="text-lg sm:text-xl font-bold mb-4">Order Summary</h2>
-//                   <p className="mb-3 font-semibold text-sm sm:text-base">Payment Method</p>
-//                   <div className="mb-4">
-//                     <label htmlFor="paymentAmount" className="block text-xs sm:text-sm mb-1">Enter Payment Amount</label>
-//                     <input
-//                       type="number"
-//                       id="paymentAmount"
-//                       placeholder="Amount"
-//                       className="w-full p-2 sm:p-3 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-//                       value={paymentAmount}
-//                       onChange={(e) => setPaymentAmount(e.target.value)} // User inputs the amount
-//                     />
-//                   </div>
-//                   <div className="mb-4">
-//                     <label htmlFor="phoneNumber" className="block text-xs sm:text-sm mb-1">Enter Phone Number</label>
-//                     <input
-//                       type="text"
-//                       id="phoneNumber"
-//                       placeholder="Phone Number"
-//                       className="w-full p-2 sm:p-3 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-//                       value={phoneNumber}
-//                       onChange={(e) => setPhoneNumber(e.target.value)}
-//                     />
-//                   </div>
-//                   <div className="flex justify-between mb-2 text-sm">
-//                     <span>Subtotal:</span>
-//                     <span>KES {totalPrice}</span>
-//                   </div>
-//                   <div className="flex justify-between font-bold mb-4 text-sm">
-//                     <span>Total:</span>
-//                     <span>KES {totalPrice}</span>
-//                   </div>
-                  
-//                   <button 
-//                     className="w-full bg-yellow-500 text-blue-900 font-bold px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-sm"
-//                     onClick={handlePayment} 
-//                     disabled={isSubmitting} 
-//                   >
-//                     {isSubmitting ? 'Processing...' : 'Pay Now'}
-//                   </button>
-//                   {errorMessage && <p className="text-red-500 mt-3 text-xs sm:text-sm">{errorMessage}</p>}
-//                   {successMessage && <p className="text-green-500 mt-3 text-xs sm:text-sm">{successMessage}</p>}
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default CartPage;
