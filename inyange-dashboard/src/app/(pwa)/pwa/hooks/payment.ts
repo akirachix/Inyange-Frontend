@@ -1,15 +1,15 @@
 import { useState } from "react";
 export const usePayment = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); 
-  const [successMessage, setSuccessMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const processPayment = async (amount: string, phone_number: string) => {
     setIsSubmitting(true);
-    setErrorMessage(''); 
-    setSuccessMessage(''); 
+    setErrorMessage('');
+    setSuccessMessage('');
     try {
-      const paymentRequest = { amount, phone_number }; 
-      const API_URL = "https://buildmart-42eabdb55b17.herokuapp.com/process_payment/"; 
+      const paymentRequest = { amount, phone_number };
+      const API_URL = "https://buildmart-42eabdb55b17.herokuapp.com/process_payment/";
       const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify(paymentRequest),
@@ -23,14 +23,17 @@ export const usePayment = () => {
       }
       const data = await response.json();
       setSuccessMessage(data.CustomerMessage || 'Payment request processed successfully.');
-      return data; 
+      return data;
     } catch (error) {
       console.error("Failed to initiate payment:", error);
       setErrorMessage((error as Error).message || 'An error occurred during payment initiation.');
-      throw error; 
+      throw error;
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
-  return { processPayment, isSubmitting, errorMessage, successMessage }; 
+  return { processPayment, isSubmitting, errorMessage, successMessage };
 };
+
+
+

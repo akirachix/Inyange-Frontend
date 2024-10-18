@@ -16,13 +16,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
 
   const getCategoryFromMaterial = (material: string) => {
     const materialCategories: { [key: string]: string } = {
-      'Steel': 'Building Materials',
-      'Wood': 'Building Materials',
-      'Iron Sheets': 'Building Materials',
-      'Cement': 'Building Materials',
-      'Paint': 'Finishing Materials',
-      'Tiles': 'Finishing Materials',
-      'Carpentry': 'Hardware and Tools',
+      'steel': 'Building Materials',
+      'wood': 'Building Materials',
+      'ironsheets': 'Building Materials',
+      'cement': 'Building Materials',
+      'paint': 'Finishing Materials',
+      'tiles': 'Finishing Materials',
+      'carpentry': 'Hardware and Tools',
     };
     return materialCategories[material] || null;
   };
@@ -47,14 +47,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
     if (onCategorySelect) {
       onCategorySelect(material); 
     }
-    router.push(`/pwa/components/${material.replace(' ', '')}`);
+    router.push(`/pwa/${material.replace(' ', '')}`);
   };
 
   return (
     <aside 
-      className="w-full sm:w-72 p-4 bg-white shadow-md fixed top-[125px] left-0 h-[calc(100vh-64px)] overflow-y-auto z-50"
+      className="w-full sm:w-72 p-4 bg-white shadow-md fixed top-[125px] left-0 h-[calc(100vh-64px)] overflow-y-auto z-50 text-xl"
     >
-      <h3 className="text-xl font-bold mb-4 text-gray-900">All Categories</h3>
+      <h3 className="text-2xl font-bold mb-4 text-gray-900">All Categories</h3>
       <ul className="space-y-3">
         <li>
           <div 
@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
           </div>
           {expandedCategory === 'Building Materials' && (
             <ul className="pl-6 mt-2 space-y-2">
-              {['Steel', 'Wood', 'Iron Sheets', 'Cement'].map((material) => (
+              {['steel', 'wood', 'ironsheets', 'cement'].map((material) => (
                 <li
                   key={material}
                   className={`cursor-pointer px-4 py-2 rounded-md transition-colors duration-200 ease-in-out ${
@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
           </div>
           {expandedCategory === 'Finishing Materials' && (
             <ul className="pl-6 mt-2 space-y-2">
-              {['Paint', 'Tiles'].map((material) => (
+              {['paint', 'tiles'].map((material) => (
                 <li
                   key={material}
                   className={`cursor-pointer px-4 py-2 rounded-md transition-colors duration-200 ease-in-out ${
@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
           </div>
           {expandedCategory === 'Hardware and Tools' && (
             <ul className="pl-6 mt-2 space-y-2">
-              {['Carpentry'].map((material) => (
+              {['carpentry'].map((material) => (
                 <li
                   key={material}
                   className={`cursor-pointer px-4 py-2 rounded-md transition-colors duration-200 ease-in-out ${

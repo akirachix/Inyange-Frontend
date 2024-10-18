@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -5,13 +6,12 @@ import * as yup from "yup";
 import { FaTimes } from "react-icons/fa";
 import { IoCloudUpload } from "react-icons/io5";
 import { addMaterial } from "../../utils/addMaterials";
-import Image from 'next/image'; 
+import Image from 'next/image';
 import { MaterialData } from "../../utils/types";
-
 
 interface AddMaterialModalProps {
   onClose: () => void;
-  onMaterialAdded: (newMaterial: MaterialData) => void; 
+  onMaterialAdded: (newMaterial: MaterialData) => void;
 }
 
 const schema = yup.object().shape({
@@ -74,7 +74,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
     try {
       const response = await addMaterial(data);
 
-      if (typeof response === 'string') {
+      if (typeof response === "string") {
         setFeedbackMessage(`Failed to add material: ${response}`);
         setFeedbackType("error");
       } else {
@@ -84,15 +84,15 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
         setImagePreview(null);
       }
     } catch (error: unknown) {
-            const errorMessage = (error as Error).message || "Unknown error";
-            setFeedbackMessage(`Failed to add material: ${errorMessage}`);
-            setFeedbackType("error");
-          } finally {
-            setLoading(false);
-          }
-        };
+      const errorMessage = (error as Error).message || "Unknown error";
+      setFeedbackMessage(`Failed to add material: ${errorMessage}`);
+      setFeedbackType("error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return (
+    return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl">
         <div className="flex justify-between items-center p-6 border-b">

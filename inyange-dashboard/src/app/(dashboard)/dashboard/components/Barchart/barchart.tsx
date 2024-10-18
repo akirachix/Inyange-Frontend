@@ -36,7 +36,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
     <div className="bg-white p-6 rounded-lg shadow-lg mb-4 md:mb-8 text-[20px]">
       <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
       <ResponsiveContainer width="100%" height={350}>
-        <BarChart data={data} margin={{ top: 20, right: 50, left: 80, bottom: 5 }}>
+        <BarChart data={data} margin={{ top: 20, right: 50, left: 15, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             dataKey={xAxisKey}
@@ -58,7 +58,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
             }}
           />
           <Tooltip />
-          <Bar dataKey={barDataKey} fill={barColor} barSize={60} />
+          <Bar dataKey={barDataKey} fill={barColor} barSize={50} />
         </BarChart>
       </ResponsiveContainer>
     </div>
