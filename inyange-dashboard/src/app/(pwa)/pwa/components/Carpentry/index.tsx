@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useMaterials } from "../hooks/useMaterials";
-import { MaterialData } from "../utils/types";
-import Layout from "../components/Layout";
+import { useMaterials } from "../../hooks/useMaterials";
+import { MaterialData } from "../../utils/types";
+import Layout from "../Layout";
 import Image from "next/image";
-import Navbar from "../components/Navbar";
+import Navbar from "../Navbar";
 
 const Carpentry: React.FC = () => {
   const { materials, loading } = useMaterials() as {
