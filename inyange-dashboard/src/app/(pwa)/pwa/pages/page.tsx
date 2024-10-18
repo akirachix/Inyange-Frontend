@@ -2,34 +2,38 @@
 import React, { useEffect, useState } from "react";
 import { ChevronLeft, Minus, Plus } from "lucide-react";
 import Link from "next/link";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { MaterialData } from "../../utils/types";
-import { usePayment } from "../../hooks/payment";
+import { MaterialData } from "../utils/types";
+import { usePayment } from "../hooks/payment";
 import Image from "next/image";
-
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { processPayment, isSubmitting, errorMessage, successMessage } = usePayment();
+  const { processPayment, isSubmitting, errorMessage, successMessage } =
+    usePayment();
 
   useEffect(() => {
-    const items = localStorage.getItem('cart');
+    const items = localStorage.getItem("cart");
     if (items) {
       try {
         const parsedItems = JSON.parse(items);
-        setCartItems(parsedItems); 
+        setCartItems(parsedItems);
       } catch (error) {
-        console.error('Error parsing cart items:', error); 
+        console.error("Error parsing cart items:", error);
       }
     }
   }, []);
 
   const handleQuantityChange = (id: number, increment: boolean) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
         item.material_id === id
-          ? { ...item, quantity: increment ? item.quantity + 1 : Math.max(item.quantity - 1, 1) }
+          ? {
+              ...item,
+              quantity: increment
+                ? item.quantity + 1
+                : Math.max(item.quantity - 1, 1),
+            }
           : item
       )
     );
@@ -47,51 +51,63 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-12">
       <header className="flex items-center mb-8">
-      <Link href="/pwa/components/Steel">
-            <button className="text-gray-800 transition-colors">
-                <ChevronLeft size={50}  className="xl:mt-[25px]"/>
-            </button>
+        <Link href="/pwa/steel">
+          <button className="text-gray-800 transition-colors">
+            <ChevronLeft size={50} className="xl:mt-[25px]" />
+          </button>
         </Link>
         <div className="flex items-center ml-4">
-        <Image
+          <Image
             src="/images/bmLogo.png"
             alt="BuildMart Logo"
             width={160}
             height={32}
-            className="w-40 sm:w-48 lg:w-[100%] xl:w-[83%] xl:ml-[-25px]"
+            className="w-40 sm:w-48 lg:w-[100%] xl:w-[75%] xl:ml-[5px]"
           />
           <span className="font-bold text-2xl text-blue-900"></span>
         </div>
-        <div className="ml-auto relative">
+        {/* <div className="ml-auto relative">
           <MdOutlineShoppingCart className="text-gray-600" size={36} />
           <span className="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
             {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
           </span>
-        </div>
+        </div> */}
       </header>
 
       <main className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="p-8 lg:p-12">
-          <h1 className="text-[28px] font-bold mb-8 text-blue-900">Shopping Cart</h1>
+          <h1 className="text-[28px] font-bold mb-8 text-blue-900">
+            Shopping Cart
+          </h1>
 
           <div className="flex flex-col xl:flex-row gap-12">
             <div className="flex-grow">
               <table className="w-[90%] mb-8">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">Product</th>
-                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">Quantity</th>
-                    <th className="text-right pb-4 text-blue-900 font-semibold text-[20px]">Total Price</th>
+                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">
+                      Product
+                    </th>
+                    <th className="text-left pb-4 text-blue-900 font-semibold text-[20px]">
+                      Quantity
+                    </th>
+                    <th className="text-right pb-4 text-blue-900 font-semibold text-[20px]">
+                      Total Price
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
-                    <tr key={item.material_id} className="border-b border-gray-200">
+                    <tr
+                      key={item.material_id}
+                      className="border-b border-gray-200"
+                    >
                       <td className="py-6">
                         <div className="flex items-center">
-                       
                           <div>
-                            <p className="font-bold text-xl text-blue-900 text-[20px]">{item.material_name}</p>
+                            <p className="font-bold text-xl text-blue-900 text-[20px]">
+                              {item.material_name}
+                            </p>
                             <p className="text-[16px] mt-1">
                               Brand: {item.brand_name}
                             </p>
@@ -100,24 +116,30 @@ const CartPage = () => {
                       </td>
                       <td>
                         <div className="flex items-center border rounded-md w-36 shadow-sm">
-                          <button 
+                          <button
                             className="px-4 py-2 hover:bg-gray-100 transition-colors"
-                            onClick={() => handleQuantityChange(item.material_id, false)}
+                            onClick={() =>
+                              handleQuantityChange(item.material_id, false)
+                            }
                           >
                             <Minus size={18} />
                           </button>
                           <span className="px-4 py-2 flex-grow text-center font-semibold text-lg">
                             {item.quantity}
                           </span>
-                          <button 
+                          <button
                             className="px-4 py-2 hover:bg-gray-100 transition-colors"
-                            onClick={() => handleQuantityChange(item.material_id, true)}
+                            onClick={() =>
+                              handleQuantityChange(item.material_id, true)
+                            }
                           >
                             <Plus size={18} />
                           </button>
                         </div>
                       </td>
-                      <td className="text-right font-bold text-xl text-blue-900">KES {item.price * item.quantity}</td>
+                      <td className="text-right font-bold text-xl text-blue-900">
+                        KES {item.price * item.quantity}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -156,16 +178,20 @@ const CartPage = () => {
                   <span>Total:</span>
                   <span>KES {totalPrice}</span>
                 </div>
-                
-                <button 
+
+                <button
                   className="w-full bg-yellow-500 text-blue-900 font-bold px-6 py-4 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-[17px] xl:mt-[30px]"
-                  onClick={handlePayment} 
-                  disabled={isSubmitting} 
+                  onClick={handlePayment}
+                  disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Processing...' : 'Pay Now'}
+                  {isSubmitting ? "Processing..." : "Pay Now"}
                 </button>
-                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-                {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+                {errorMessage && (
+                  <p className="text-red-500 mt-4">{errorMessage}</p>
+                )}
+                {successMessage && (
+                  <p className="text-green-500 mt-4">{successMessage}</p>
+                )}
               </div>
             </div>
           </div>
@@ -176,6 +202,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-
-
-

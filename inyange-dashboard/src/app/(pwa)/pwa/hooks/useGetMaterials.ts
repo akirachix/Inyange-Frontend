@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchMaterials } from '../utils/fetchMaterials';
 
 export interface Material {
+    image: boolean;
     id: number;        
     name: string; 
     material_name: string;     

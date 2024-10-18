@@ -8,11 +8,11 @@ import { MaterialData } from '../../utils/types';
  
 interface NavbarProps {
   itemCount: number;
-  cart?: MaterialData[]; // Make cartItems optional
-  onAddToCart: (item: MaterialData) => void; // Function to handle adding items
+  cart?: MaterialData[]; 
+  onAddToCart: (item: MaterialData) => void; 
  }
  const Navbar: React.FC<NavbarProps> = ({ itemCount }) => {
-  const [storedCartItems, setStoredCartItems] = useState<MaterialData[]>([]); // State to hold cart items
+  const [storedCartItems, setStoredCartItems] = useState<MaterialData[]>([]); 
   useEffect(() => {
 
     const storedItems = localStorage.getItem('cart'); // Use 'cartItems' key
@@ -44,7 +44,7 @@ interface NavbarProps {
     <nav className="flex flex-row justify-between items-center w-full p-4 bg-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center px-6">
       <Link
-            href="/pwa/components/Homepage"
+            href="/pwa/homepage"
             className="mr-4 sm:mr-6 lg:mr-8 mt-5 text-blue-950"
           >
             <FiChevronLeft size={40} className="lg:w-[50px]" />
@@ -61,7 +61,7 @@ interface NavbarProps {
     
    
        <div className="relative">
-       <Link href="/pwa/components/Pages">
+       <Link href="/pwa/pages">
          <span className="cursor-pointer">
            <MdOutlineShoppingCart
              className="text-[#263C5A] mr-[50px]"
@@ -70,7 +70,7 @@ interface NavbarProps {
          </span>
        </Link>
        {itemCount > 0 && (
-         <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+         <span className="absolute -top-2 -left-[-20px] bg-yellow-500 text-white rounded-full w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9 flex items-center justify-center text-[12px] sm:text-[14px] lg:text-[18px]">
            {itemCount}
          </span>
        )}
