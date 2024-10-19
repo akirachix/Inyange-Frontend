@@ -66,12 +66,6 @@ const CartPage = () => {
           />
           <span className="font-bold text-2xl text-blue-900"></span>
         </div>
-        {/* <div className="ml-auto relative">
-          <MdOutlineShoppingCart className="text-gray-600" size={36} />
-          <span className="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
-            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-          </span>
-        </div> */}
       </header>
 
       <main className="bg-white rounded-xl shadow-lg overflow-hidden">
