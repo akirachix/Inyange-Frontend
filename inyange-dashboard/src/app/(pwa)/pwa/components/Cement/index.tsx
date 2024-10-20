@@ -72,7 +72,6 @@ const Cement: React.FC = () => {
         },
       ]);
     }
-    //  alert(`${material.material_name} has been added to your cart!`);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };

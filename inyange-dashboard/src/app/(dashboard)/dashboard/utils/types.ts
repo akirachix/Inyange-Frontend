@@ -23,6 +23,7 @@ export interface NewMaterialData {
 
 
   export interface CartItem {
+    material_id: number;
     category_name: ReactNode;
     image: string;
     material_name: string;

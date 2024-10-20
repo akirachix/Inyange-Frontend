@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Home, ShoppingCart, ClipboardList, LogOut } from "lucide-react";
+import { Home, ShoppingCart, LogOut } from "lucide-react";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -45,7 +45,7 @@ const Sidebar = () => {
           <span className="text-[22px] mt-[10px] nh:text-[18px] nh:mt-[5px] nhm:text-[20px] nhm:mt-[7px]">Inventory</span>
         </Link>
 
-        <Link
+        {/* <Link
           href="/dashboard/order"
           className={`flex items-center space-x-4 ${
             activeLink === "/order" ? "text-[#F8B612]" : "text-white"
@@ -54,14 +54,14 @@ const Sidebar = () => {
         >
           <ClipboardList className="w-8 h-8 md:w-10 md:h-10 mt-[10px] nh:w-7 nh:h-7 nh:mt-[5px] nhm:w-9 nhm:h-9 nhm:mt-[7px]" />
           <span className="text-[22px] mt-[10px] nh:text-[18px] nh:mt-[5px] nhm:text-[20px] nhm:mt-[7px]">Orders</span>
-        </Link>
+        </Link> */}
 
         <Link
-          href="/dashboard/register"
+          href="/dashboard/login"
           className={`flex items-center space-x-4 ${
             activeLink === "/logout" ? "text-[#F8B612]" : "text-white"
           } hover:text-[#F8B612] transition-all duration-300`}
-          onClick={() => handleLinkClick("/signup")}
+          onClick={() => handleLinkClick("/login")}
         >
           <LogOut className="w-8 h-8 md:w-10 md:h-10 mt-[70%] nh:w-7 nh:h-7 nh:mt-[50%] nhm:w-9 nhm:h-9 nhm:mt-[60%]" />
           <span className="text-[22px] mt-[70%] nh:text-[18px] nh:mt-[50%] nhm:text-[20px] nhm:mt-[60%]">Logout</span>

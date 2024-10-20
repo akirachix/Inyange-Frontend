@@ -26,3 +26,4 @@ const CartDisplay: React.FC = () => {
 };
 
 export default CartDisplay;
+

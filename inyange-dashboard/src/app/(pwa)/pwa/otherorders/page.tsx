@@ -189,7 +189,7 @@ const OtherOrders = () => {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center gap-4 mt-6 justify-center sm:mt-8 mb-6 w-full px-4 sm:px-0 lg:mt-20 lg:ml-[-10%] xl:ml-[-400px] xl:mt-[85px]">
+      <div className="flex flex-col sm:flex-row items-center gap-4 mt-6 justify-center sm:mt-8 mb-6 w-full px-4 sm:px-0 lg:mt-20 lg:ml-[-10%] xl:ml-[-400px] xl:mt-[85px] md:ml-[-40px] md:mt-[8px]">
         <div className="flex items-center gap-4">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -216,7 +216,7 @@ const OtherOrders = () => {
 
         <Link
           href="/pwa/pages"
-          className="mt-4 sm:mt-0 sm:ml-auto py-2 px-4 lg:px-6 lg:py-3 sm:text-2xl lg:text-3xl lg:ml-[20px] xl:text-[23px] font-semibold bg-[#F8B612] text-blue-900 transition-colors xl:ml-[30px] rounded-lg"
+          className="mt-4 sm:mt-0 sm:ml-auto py-2 px-4 lg:px-6 lg:py-3 sm:text-2xl lg:text-3xl lg:ml-[20px] xl:text-[23px] font-semibold bg-[#F8B612] text-blue-900 transition-colors xl:ml-[30px] rounded-lg md:ml-[20px] "
         >
           Checkout
         </Link>

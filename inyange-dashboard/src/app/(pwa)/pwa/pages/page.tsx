@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronLeft, Minus, Plus } from "lucide-react";
+import { ChevronLeft, Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import { MaterialData } from "../utils/types";
 import { usePayment } from "../hooks/payment";
@@ -9,8 +9,7 @@ import Image from "next/image";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { processPayment, isSubmitting, errorMessage, successMessage } =
-    usePayment();
+  const { processPayment, isSubmitting, errorMessage, successMessage } = usePayment();
 
   useEffect(() => {
     const items = localStorage.getItem("cart");
@@ -30,14 +29,19 @@ const CartPage = () => {
         item.material_id === id
           ? {
               ...item,
-              quantity: increment
-                ? item.quantity + 1
-                : Math.max(item.quantity - 1, 1),
+              quantity: increment ? item.quantity + 1 : Math.max(item.quantity - 1, 1),
             }
           : item
       )
     );
   };
+
+  const handleRemoveItem = (id: number) => {
+    const updatedCartItems = cartItems.filter((item) => item.material_id !== id);
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+  };
+
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -51,7 +55,7 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-12">
       <header className="flex items-center mb-8">
-        <Link href="/pwa/steel">
+        <Link href="/pwa/homepage">
           <button className="text-gray-800 transition-colors">
             <ChevronLeft size={50} className="xl:mt-[25px]" />
           </button>
@@ -92,29 +96,19 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
-                    <tr
-                      key={item.material_id}
-                      className="border-b border-gray-200"
-                    >
+                    <tr key={item.material_id} className="border-b border-gray-200">
                       <td className="py-6">
                         <div className="flex items-center">
-                          <div>
-                            <p className="font-bold text-xl text-blue-900 text-[20px]">
-                              {item.material_name}
-                            </p>
-                            <p className="text-[16px] mt-1">
-                              Brand: {item.brand_name}
-                            </p>
-                          </div>
+                          <p className="font-bold text-xl text-blue-900 text-[20px]">
+                            {item.material_name}
+                          </p>
                         </div>
                       </td>
                       <td>
                         <div className="flex items-center border rounded-md w-36 shadow-sm">
                           <button
                             className="px-4 py-2 hover:bg-gray-100 transition-colors"
-                            onClick={() =>
-                              handleQuantityChange(item.material_id, false)
-                            }
+                            onClick={() => handleQuantityChange(item.material_id, false)}
                           >
                             <Minus size={18} />
                           </button>
@@ -123,9 +117,7 @@ const CartPage = () => {
                           </span>
                           <button
                             className="px-4 py-2 hover:bg-gray-100 transition-colors"
-                            onClick={() =>
-                              handleQuantityChange(item.material_id, true)
-                            }
+                            onClick={() => handleQuantityChange(item.material_id, true)}
                           >
                             <Plus size={18} />
                           </button>
@@ -133,6 +125,14 @@ const CartPage = () => {
                       </td>
                       <td className="text-right font-bold text-xl text-blue-900">
                         KES {item.price * item.quantity}
+                      </td>
+                      <td className="text-right">
+                        <button
+                          className="px-4 py-2 text-red-600 hover:text-red-800 transition-colors"
+                          onClick={() => handleRemoveItem(item.material_id)}
+                        >
+                          <Trash size={18} />
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -180,12 +180,8 @@ const CartPage = () => {
                 >
                   {isSubmitting ? "Processing..." : "Pay Now"}
                 </button>
-                {errorMessage && (
-                  <p className="text-red-500 mt-4">{errorMessage}</p>
-                )}
-                {successMessage && (
-                  <p className="text-green-500 mt-4">{successMessage}</p>
-                )}
+                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+                {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
               </div>
             </div>
           </div>
@@ -196,3 +192,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
