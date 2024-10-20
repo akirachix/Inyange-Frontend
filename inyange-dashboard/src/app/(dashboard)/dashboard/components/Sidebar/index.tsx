@@ -45,17 +45,6 @@ const Sidebar = () => {
           <span className="text-[22px] mt-[10px] nh:text-[18px] nh:mt-[5px] nhm:text-[20px] nhm:mt-[7px]">Inventory</span>
         </Link>
 
-        {/* <Link
-          href="/dashboard/order"
-          className={`flex items-center space-x-4 ${
-            activeLink === "/order" ? "text-[#F8B612]" : "text-white"
-          } hover:text-[#F8B612] transition-all duration-300`}
-          onClick={() => handleLinkClick("/order")}
-        >
-          <ClipboardList className="w-8 h-8 md:w-10 md:h-10 mt-[10px] nh:w-7 nh:h-7 nh:mt-[5px] nhm:w-9 nhm:h-9 nhm:mt-[7px]" />
-          <span className="text-[22px] mt-[10px] nh:text-[18px] nh:mt-[5px] nhm:text-[20px] nhm:mt-[7px]">Orders</span>
-        </Link> */}
-
         <Link
           href="/dashboard/login"
           className={`flex items-center space-x-4 ${
