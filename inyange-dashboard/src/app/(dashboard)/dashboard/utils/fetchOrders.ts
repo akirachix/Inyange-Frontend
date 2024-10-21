@@ -1,6 +1,6 @@
 export const fetchOrders = async () => {
     try {
-        const response = await fetch(`${process.env.BASE_URL}/api/orderdetails`);
+        const response = await fetch(`${process.env.BASE_URL}/api/materials`);
         if (!response.ok) {
             throw new Error('Failed to fetch orders: ' + await response.text());
         }

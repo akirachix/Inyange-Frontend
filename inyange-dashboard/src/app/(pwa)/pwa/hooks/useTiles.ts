@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { fetchMaterials } from '../utils/fetchMaterials';
 
-// Named export
+
 export const useMaterials = () => {
   const [materials, setMaterials] = useState([]);
   const [loading, setLoading] = useState(true);
