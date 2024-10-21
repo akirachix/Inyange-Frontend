@@ -85,7 +85,7 @@ const Paint: React.FC = () => {
         }}
       />
       <div className="flex flex-row min-h-screen bg-gray-100 xl:mt-10">
-        <div className="flex-1 p-4 sm:p-6 ml-72 pt-24 mt-24 overflow-auto">
+        <div className="flex-1 p-4 sm:p-6 ml-52 xl:ml-72 pt-24 mt-6 xl:mt-24 md:mt-40 lg:mt-40 overflow-auto">
           {loading ? (
             <p className="text-center">Loading...</p>
           ) : (

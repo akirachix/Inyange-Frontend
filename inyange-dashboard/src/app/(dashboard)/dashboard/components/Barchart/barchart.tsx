@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
@@ -17,12 +16,12 @@ interface BarChartComponentProps {
   yAxisLabelFontSize?: string;
   yAxisLabel?: string;
 }
+
 const BarChartComponent: React.FC<BarChartComponentProps> = ({
   data, xAxisKey, barDataKey, title, barColor = '#8884D8', yAxisLabel,
 }) => {
   
   const yAxisTickFormatter = (value: number) => {
-   
     if (value >= 1000000) {
       return `${(value / 1000000).toFixed(1)}M`;
     } else if (value >= 1000) {
@@ -64,4 +63,5 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
     </div>
   );
 };
+
 export default BarChartComponent;

@@ -126,77 +126,75 @@ const DashboardPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-[70px]">
-        <div className="flex justify-center">
-          <h1 className="text-center text-xl md:text-4xl font-bold mt-8 mb-4">
-            Dashboard
-          </h1>
-        </div>
+    <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-[70px]">
+      <div className="flex justify-center">
+        <h1 className="text-center text-4xl nh:text-4xl nhm:text-4xl font-bold mt-8 mb-4 lg:mt-[-50px]">
+          Dashboard
+        </h1>
+      </div>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10">
-          <DashboardCard
-            title="Total Inventory Value"
-            value={`KES ${totalInventoryValue.toLocaleString()}`}
-          />
-          <DashboardCard
-            title="Total Brands"
-            value={uniqueBrandsCount.toLocaleString()}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10">
+        <DashboardCard
+          title="Total Inventory Value"
+          value={`KES ${totalInventoryValue.toLocaleString()}`}
+        />
+        <DashboardCard
+          title="Total Brands"
+          value={uniqueBrandsCount.toLocaleString()}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 nh:grid-cols-1 nhm:grid-cols-2 gap-6 w-full mt-24">
+        <div className="flex flex-col min-w-[300px]"> {/* Added min-w-[300px] to stabilize width */}
+          <div className="mb-4 flex items-center gap-4 justify-center xl:text-[16px]">
+            <select 
+              value={currentMaterialGroup}
+              onChange={(e) => setCurrentMaterialGroup(Number(e.target.value))}
+              className="p-2 border rounded-md bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#263C5A]"
+            >
+              {Array.from({ length: totalGroups }, (_, i) => (
+                <option key={i} value={i}>
+                  {getMaterialGroupRangeLabel(i)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <BarChartComponent
+            data={currentGroupData}
+            xAxisKey="material"
+            barDataKey="revenue"
+            title="Inventory Distribution per Material"
+            yAxisLabel="Inventory value per Material"
+            barColor="#577399"
           />
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-24">
-          <div className="flex flex-col">
-            <div className="mb-4 flex xl:ml-[500px] items-center gap-4 xl:text-[16px]">
-              <select 
-                value={currentMaterialGroup}
-                onChange={(e) => setCurrentMaterialGroup(Number(e.target.value))}
-                className="p-2 border rounded-md bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {Array.from({ length: totalGroups }, (_, i) => (
-                  <option key={i} value={i}>
-                    {getMaterialGroupRangeLabel(i)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <BarChartComponent
-              data={currentGroupData}
-              xAxisKey="material"
-              barDataKey="revenue"
-              title="Inventory Distribution per Material"
-              yAxisLabel="Inventory value per Material"
-              yAxisLabelFontSize="40px"
-              barColor="#577399"
-            />
+        <div className="flex flex-col min-w-[300px]"> {/* Added min-w-[300px] to stabilize width */}
+          <div className="mb-4 flex items-center gap-4 justify-center xl:text-[16px]">
+            <select 
+              value={currentBrandGroup}
+              onChange={(e) => setCurrentBrandGroup(Number(e.target.value))}
+              className="p-2 border rounded-md bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#263C5A]"
+            >
+              {Array.from({ length: totalBrandGroups }, (_, i) => (
+                <option key={i} value={i}>
+                  {getBrandGroupRangeLabel(i)}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="flex flex-col">
-            <div className="mb-4 flex xl:ml-[500px] items-center gap-4 xl:text-[16px]">
-              <select 
-                value={currentBrandGroup}
-                onChange={(e) => setCurrentBrandGroup(Number(e.target.value))}
-                className="p-2 border rounded-md bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {Array.from({ length: totalBrandGroups }, (_, i) => (
-                  <option key={i} value={i}>
-                    {getBrandGroupRangeLabel(i)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <BarChartComponent
-              data={currentBrandData}
-              xAxisKey="brand"
-              barDataKey="count"
-              title="Items per Brand"
-              yAxisLabel="Number of items"
-              yAxisLabelFontSize="40px"
-              barColor="#577399"
-            />
-          </div>
+          <BarChartComponent
+            data={currentBrandData}
+            xAxisKey="brand"
+            barDataKey="count"
+            title="Items per Brand"
+            yAxisLabel="Number of items"
+            barColor="#577399"
+          />
         </div>
       </div>
-    </Layout>
-  );
+    </div>
+  </Layout>
+);
 };
 
 export default DashboardPage;
