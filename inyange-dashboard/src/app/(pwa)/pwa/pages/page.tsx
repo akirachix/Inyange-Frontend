@@ -51,6 +51,24 @@ const CartPage = () => {
   );
 
 
+  // const handlePayment = async () => {
+  //   if (!phoneNumber.startsWith("254")) {
+  //     setErrorMessage("Please enter your number starting with 254");
+  //     return;
+  //   }
+  
+  //   setErrorMessage("");
+  
+  //   try {
+  //     await processPayment(totalPrice.toString(), phoneNumber);
+      
+  //     setSuccessMessage("Payment processed successfully!");
+  //   } catch (error) {
+  //     setErrorMessage("Payment failed. Please try again.");
+  //   }
+  // };
+  
+
   const handlePayment = async () => {
     if (!phoneNumber.startsWith("254")) {
       setErrorMessage("Please enter your number starting with 254");
@@ -61,9 +79,9 @@ const CartPage = () => {
   
     try {
       await processPayment(totalPrice.toString(), phoneNumber);
-      
       setSuccessMessage("Payment processed successfully!");
     } catch (error) {
+      console.error('Payment error:', error); // Log the error
       setErrorMessage("Payment failed. Please try again.");
     }
   };
