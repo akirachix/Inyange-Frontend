@@ -9,7 +9,9 @@ import Image from "next/image";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { processPayment, isSubmitting, errorMessage, successMessage } = usePayment();
+  const [errorMessage, setErrorMessage] = useState("");  
+  const [successMessage, setSuccessMessage] = useState("");  
+  const { processPayment, isSubmitting } = usePayment();
 
   useEffect(() => {
     const items = localStorage.getItem("cart");
@@ -48,9 +50,42 @@ const CartPage = () => {
     0
   );
 
+
+  // const handlePayment = async () => {
+  //   if (!phoneNumber.startsWith("254")) {
+  //     setErrorMessage("Please enter your number starting with 254");
+  //     return;
+  //   }
+  
+  //   setErrorMessage("");
+  
+  //   try {
+  //     await processPayment(totalPrice.toString(), phoneNumber);
+      
+  //     setSuccessMessage("Payment processed successfully!");
+  //   } catch (error) {
+  //     setErrorMessage("Payment failed. Please try again.");
+  //   }
+  // };
+  
+
   const handlePayment = async () => {
-    await processPayment(totalPrice.toString(), phoneNumber);
+    if (!phoneNumber.startsWith("254")) {
+      setErrorMessage("Please enter your number starting with 254");
+      return;
+    }
+  
+    setErrorMessage("");
+  
+    try {
+      await processPayment(totalPrice.toString(), phoneNumber);
+      setSuccessMessage("Payment processed successfully!");
+    } catch (error) {
+      console.error('Payment error:', error); // Log the error
+      setErrorMessage("Payment failed. Please try again.");
+    }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-12">
@@ -147,43 +182,45 @@ const CartPage = () => {
             </div>
 
             <div className="w-full xl:w-1/3 xl:mt-[-50px]">
-              <div className="bg-[#263C5A] pl-20 pr-20 pt-[100px] pb-[100px] rounded-xl text-white shadow-lg">
-                <h2 className="text-[25px] font-bold mb-6">Order Summary</h2>
-                <p className="mb-6 font-semibold text-[20px]">Payment Method</p>
-                <input
-                  type="text"
-                  placeholder="Amount"
-                  className="w-full p-4 mb-10 border rounded-lg text-black placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
-                  value={totalPrice}
-                  readOnly
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Phone Number"
-                  className="w-full p-4 mb-12 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-                <div className="flex justify-between mb-4 text-[17px]">
-                  <span>Subtotal:</span>
-                  <span>KES {totalPrice}</span>
-                </div>
-                <div className="flex justify-between font-bold mb-8 text-[17px]">
-                  <span>Total:</span>
-                  <span>KES {totalPrice}</span>
-                </div>
+  <div className="bg-[#263C5A] pl-20 pr-20 pt-[100px] pb-[100px] rounded-xl text-white shadow-lg">
+    <h2 className="text-[25px] font-bold mb-6">Order Summary</h2>
+    <p className="mb-6 font-semibold text-[20px]">Payment Method</p>
+    <input
+      type="text"
+      placeholder="Amount"
+      className="w-full p-4 mb-10 border rounded-lg text-black placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+      value={totalPrice}
+      readOnly
+    />
+    <input
+      type="text"
+      placeholder="254 *** **** **"
+      className={`w-full p-4 mb-12 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg ${errorMessage && 'border-red-500'}`}
+      value={phoneNumber}
+      onChange={(e) => setPhoneNumber(e.target.value)}
+    />
+    {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+    
+    <div className="flex justify-between mb-4 text-[17px]">
+      <span>Subtotal:</span>
+      <span>KES {totalPrice}</span>
+    </div>
+    <div className="flex justify-between font-bold mb-8 text-[17px]">
+      <span>Total:</span>
+      <span>KES {totalPrice}</span>
+    </div>
 
-                <button
-                  className="w-full bg-yellow-500 text-blue-900 font-bold px-6 py-4 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-[17px] xl:mt-[30px]"
-                  onClick={handlePayment}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Processing..." : "Pay Now"}
-                </button>
-                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-                {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
-              </div>
-            </div>
+    <button
+      className="w-full bg-yellow-500 text-blue-900 font-bold px-6 py-4 rounded-lg shadow-md hover:bg-yellow-400 transition-colors text-[17px] xl:mt-[30px]"
+      onClick={handlePayment}
+      disabled={isSubmitting}
+    >
+      {isSubmitting ? "Processing..." : "Pay Now"}
+    </button>
+    {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+  </div>
+</div>
+
           </div>
         </div>
       </main>
