@@ -3,10 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Link from "next/link";
-import { useMaterials } from "../../hooks/useBolt";
 import { MaterialData } from "../../utils/types";
-
-
+import { useMaterials } from "../../hooks/useMaterials";
 interface CartItem {
   material_id: number;
   material_name: string;
@@ -62,7 +60,7 @@ const HeroSection = () => {
       ]);
     }
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => setShowAlert(false), 3000); 
   };
   return (
     <div className="flex flex-col bg-white py-4 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 w-full">
@@ -104,12 +102,12 @@ const HeroSection = () => {
         mt-4 sm:mt-6 md:mt-8 lg:mt-6 xl:mt-4"
       >
         <div
-          className="relative flex items-center w-full
-          border-2 border-[#F8B612] rounded-full
+          className="relative flex items-center w-full 
+          border-2 border-[#F8B612] rounded-full 
           overflow-hidden
           transition-all duration-300
           hover:shadow-md
-          focus-within:shadow-lg focus-within:border-[#E5A610]"
+          focus-within:shadow-lg focus-within:border-[#e5a610]"
         >
           <input
             type="text"
@@ -134,8 +132,8 @@ const HeroSection = () => {
             text-white
             bg-[#F8B612]
             transition-all duration-300
-            hover:bg-[#E5A610]
-            active:bg-[#D49A0F]
+            hover:bg-[#e5a610]
+            active:bg-[#d49a0f]
             focus:outline-none focus:ring-2 focus:ring-[#F8B612] focus:ring-opacity-50"
           >
             Search
@@ -148,7 +146,7 @@ const HeroSection = () => {
           {/* Hero section */}
           <div className="flex flex-col md:flex-row items-center justify-between w-full bg-gray-100 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg shadow-lg mt-6 md:mt-8 text-center md:text-left">
             <div className="md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 bg-[#263C5A] text-[#F8B612] shadow-lg mb-6 md:mb-0 h-160">
-              <h1 className="text-2xl sm:text-xl md:text-3xl lg:text-4xl xl:text-[40px] font-bold mb-4 md:mb-6 leading-tight xl:leading-[1.1] xl:w-[85%]">
+              <h1 className="text-2xl sm:text-xl md:text-3xl lg:text-4xl xl:text-[40px] font-bold mb-4 md:mb-6 leading-tight xl:leading-[1.1] xl:w-[55%]">
                 Everything You Need For Your Building, All in One Place
               </h1>
               <Link href="/pwa/steel">
@@ -175,11 +173,11 @@ const HeroSection = () => {
             <div className="flex flex-col md:flex-row w-full justify-center md:justify-between items-center md:items-start gap-4">
               {/* Building Materials */}
               <div
-                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg
-                p-4
-                w-full sm:w-[80%] md:w-[32%]
+                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg 
+                p-4 
+                w-full sm:w-[80%] md:w-[32%] 
                 mx-auto
-                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px]
+                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px] 
                 h-auto
                 max-w-[400px] md:max-w-none"
               >
@@ -200,12 +198,12 @@ const HeroSection = () => {
                 <div className="mt-4">
                   <Link href="/pwa/steel">
                     <button
-                      className="bg-transparent text-white border-2 border-[#F8B612]
+                      className="bg-transparent text-white border-2 border-[#F8B612] 
                       px-4 py-2
                       text-lg sm:text-base
-                      font-bold rounded-full
-                      transition duration-300 ease-in-out
-                      hover:bg-[#F8B612] hover:text-[#263C5A]
+                      font-bold rounded-full 
+                      transition duration-300 ease-in-out 
+                      hover:bg-[#F8B612] hover:text-[#263C5A] 
                       xl:text-[18px] xl:px-[23px] xl:py-[14px] md:text-[17px] md:py-[14px]"
                     >
                       Shop Now
@@ -215,11 +213,11 @@ const HeroSection = () => {
               </div>
               {/* Finishing Materials */}
               <div
-                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg
-                p-4
-                w-full sm:w-[80%] md:w-[32%]
+                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg 
+                p-4 
+                w-full sm:w-[80%] md:w-[32%] 
                 mx-auto
-                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px]
+                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px] 
                 h-auto
                 max-w-[400px] md:max-w-none"
               >
@@ -240,12 +238,12 @@ const HeroSection = () => {
                 <div className="mt-4">
                   <Link href="/pwa/tiles">
                     <button
-                      className="bg-transparent text-white border-2 border-[#F8B612]
+                      className="bg-transparent text-white border-2 border-[#F8B612] 
                       px-4 py-2
                       text-lg sm:text-base
-                      font-bold rounded-full
-                      transition duration-300 ease-in-out
-                      hover:bg-[#F8B612] hover:text-[#263C5A]
+                      font-bold rounded-full 
+                      transition duration-300 ease-in-out 
+                      hover:bg-[#F8B612] hover:text-[#263C5A] 
                       xl:text-[18px] xl:px-[23px] xl:py-[14px] md:text-[17px] md:py-[14px]"
                     >
                       Shop Now
@@ -255,11 +253,11 @@ const HeroSection = () => {
               </div>
               {/* Hardware and Tools */}
               <div
-                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg
-                p-4
-                w-full sm:w-[80%] md:w-[32%]
+                className="flex flex-col items-center bg-[#263C5A] text-white border border-[#F8B612] rounded-lg shadow-lg 
+                p-4 
+                w-full sm:w-[80%] md:w-[32%] 
                 mx-auto
-                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px]
+                min-h-[280px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px] 
                 h-auto
                 max-w-[400px] md:max-w-none"
               >
@@ -280,12 +278,12 @@ const HeroSection = () => {
                 <div className="mt-4">
                   <Link href="/pwa/carpentry">
                     <button
-                      className="bg-transparent text-white border-2 border-[#F8B612]
+                      className="bg-transparent text-white border-2 border-[#F8B612] 
                       px-4 py-2
                       text-lg sm:text-base
-                      font-bold rounded-full
-                      transition duration-300 ease-in-out
-                      hover:bg-[#F8B612] hover:text-[#263C5A]
+                      font-bold rounded-full 
+                      transition duration-300 ease-in-out 
+                      hover:bg-[#F8B612] hover:text-[#263C5A] 
                       xl:text-[18px] xl:px-[23px] xl:py-[14px] md:text-[17px] md:py-[14px]"
                     >
                       Shop Now
@@ -327,6 +325,7 @@ const HeroSection = () => {
                       return "/images/brick.jpeg";
                     }else if (name.includes("cement")) {
                       return "/images/duracem.jpg";
+                      
                     }else {
                       return (
                         (typeof material.image === "string" && material.image) ||
@@ -345,7 +344,7 @@ const HeroSection = () => {
                     <p className="text-xl font-bold">KES {material.price}</p>
                     <button
                       onClick={() => handleAddToCart(material)}
-                      className="mt-2 bg-[#F8B612] text-white px-4 py-2 rounded-full hover:bg-[#E5A610] transition duration-200"
+                      className="mt-2 bg-[#F8B612] text-white px-4 py-2 rounded-full hover:bg-[#e5a610] transition duration-200"
                     >
                       Buy Now
                     </button>
@@ -369,46 +368,14 @@ const HeroSection = () => {
                 key={material.material_id}
                 className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200"
               >
-<Image
-                  src={(() => {
-                    const name = material.material_name.toLowerCase();
-                    if (name.includes("paint")) {
-                      return "/images/paint.jpg";
-                    } else if (name.includes("cement")) {
-                      return "/images/duracem.jpg";
-                    } else if (name.includes("carpentry")) {
-                      return "/images/carpentry.jpg";
-                    }else if (name.includes("tiles")) {
-                      return "/images/tiles.jpg";
-                    }else if (name.includes("wood")) {
-                      return "/images/wood.jpg";
-                    }else if (name.includes("steel")) {
-                      return "/images/steel.png";
-                    }else if (name.includes("sheets")) {
-                      return "/images/sheets.jpg";
-                    }else if (name.includes("brick")) {
-                      return "/images/brick.jpeg";
-                    }else if (name.includes("cement")) {
-                      return "/images/duracem.jpg";
-                    }else {
-                      return (
-                        (typeof material.image === "string" && material.image) ||
-                        "/images/placeholder-image.png"
-                      );
-                    }
-                  })()}
-                  alt={material.material_name}
-                  width={140}
-                  height={140}
-                  className="rounded-lg mb-3"
-                />
+     
                 <div className="p-4">
                   <h3 className="font-semibold text-lg">{material.material_name}</h3>
                   <p className="text-gray-600">{material.brand_name}</p>
-                  <p className="text-xl font-bold">KES {material.price}</p>
+                  <p className="text-xl font-bold">${material.price}</p>
                   <button
                     onClick={() => handleAddToCart(material)}
-                    className="mt-2 bg-[#F8B612] text-white px-4 py-2 rounded-full hover:bg-[#E5A610] transition duration-200"
+                    className="mt-2 bg-[#F8B612] text-white px-4 py-2 rounded-full hover:bg-[#e5a610] transition duration-200"
                   >
                     Add to Cart
                   </button>
