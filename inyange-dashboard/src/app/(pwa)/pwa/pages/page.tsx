@@ -79,7 +79,7 @@ const CartPage = () => {
   };
   const isOverBudget = budget && totalPrice > budget;
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-12">
+    <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-14">
       <header className="flex items-center mb-8">
         <Link href="/pwa/homepage">
           <button className="text-gray-800 transition-colors">
@@ -157,7 +157,7 @@ const CartPage = () => {
                 </button>
               </Link>
             </div>
-            <div className="w-full xl:w-[40%] xl:mt-[-70px]">
+            <div className="w-full xl:w-[55%] xl:mt-[-83px]">
               <div className="bg-[#263C5A] pl-20 pr-20 pt-[50px] pb-[50px] rounded-xl text-white shadow-lg">
                 <h2 className="text-[25px] font-bold mb-4">Order Summary</h2>
                 {/* Budget Form */}
