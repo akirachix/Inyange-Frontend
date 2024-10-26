@@ -1,3 +1,4 @@
+import React from "react";
 import HeroSection from "../components/Homepage";
 
 export const dynamic = "force-dynamic";
