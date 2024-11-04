@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart} from "react-icons/md";
+import {FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import { MaterialData } from "../../utils/types";
 import { useMaterials } from "../../hooks/useMaterials";
@@ -34,7 +35,10 @@ const HeroSection = () => {
     );
     setFilteredMaterials(filtered);
   }, [materials, searchQuery]);
-  const [, setShowAlert] = useState(false);
+  // const [, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+
   const handleAddToCart = (material: MaterialData) => {
     const existingItem = cartItems.find(
       (item) => item.material_id === material.material_id
@@ -62,8 +66,22 @@ const HeroSection = () => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000); 
   };
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem("cart");
+      localStorage.removeItem("user");
+      window.location.href = "/dashboard/login"; // Adjust this path as needed
+    }
+  };
+
   return (
     <div className="flex flex-col bg-white py-4 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 w-full">
+       {showAlert && (
+        <div className="fixed top-4 right-4 bg-yellow-500 text-white px-8 py-4 rounded-lg shadow-lg z-50 text-[16px]">
+          Item added to cart!
+        </div>
+      )}
       {/* Header section */}
       <div className="flex items-center w-full px-4 sm:px-8 lg:px-16 xl:px-24">
         <div className="flex items-center lg:ml-[-18%] xl:ml-[-330px]"></div>
@@ -75,10 +93,10 @@ const HeroSection = () => {
             alt="Logo"
             width={160}
             height={60}
-            className="w-40 sm:w-48 lg:w-[100%] xl:w-[103%] xl:ml-[-5px] sm:ml-[-100px]"
+            className="w-40 sm:w-48 lg:w-[100%] xl:w-[103%] xl:ml-[-5px] sm:ml-[-100px] md:ml-[-10px]"
           />
         </div>
-        <div className="relative flex items-center space-x-10 sm:space-x-8 md:space-x-10 mx-auto md:mx-0 xl:mt-[20px] xl:justify-evenly pr-8">
+        <div className="relative flex items-center space-x-10 sm:space-x-8 md:space-x-10 mx-auto md:mx-0 xl:mt-[20px] xl:justify-evenly pr-8 xl:gap-[20px]">
           <Link
             href="/pwa/pages"
             className="relative mt-6 ml-[180%] sm:ml-6 lg:ml-[10%] xl:ml-[10%] md:ml-[40%]"
@@ -94,6 +112,15 @@ const HeroSection = () => {
               )}
             </span>
           </Link>
+
+          <button
+            onClick={handleLogout}
+            className="mt-6 text-[#263C5A] hover:text-[#F8B612] transition-colors"
+            aria-label="Logout"
+          >
+            <FiLogOut className="sm:w-9 sm:h-9 lg:w-12 lg:h-9 xl:size-9 md:size-8 w-9 h-6" />
+          </button>
+
         </div>
       </div>
       {/* Search bar */}
@@ -298,11 +325,11 @@ const HeroSection = () => {
             <h2 className="text-2xl sm:text-lg md:text-3xl lg:text-3xl font-bold mb-4 text-black xl:text-[30px]">
               Hot Deals
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center place-items-center">
               {materials.slice(36, 52).map((material) => (
                 <div
                   key={material.material_id}
-                  className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200"
+                  className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 xl:px-20 xl:py-6"
                 >
 <Image
                   src={(() => {
@@ -326,7 +353,12 @@ const HeroSection = () => {
                     }else if (name.includes("cement")) {
                       return "/images/duracem.jpg";
                       
-                    }else {
+                    }
+                    else if (name.includes("mabati")) {
+                      return "/images/sheets.jpg";
+                    }
+                    
+                    else {
                       return (
                         (typeof material.image === "string" && material.image) ||
                         "/images/placeholder-image.png"
@@ -338,7 +370,7 @@ const HeroSection = () => {
                   height={140}
                   className="rounded-lg mb-3"
                 />
-                  <div className="p-4">
+                  <div className="p-6">
                     <h3 className="font-semibold text-lg">{material.material_name}</h3>
                     <p className="text-gray-600">{material.brand_name}</p>
                     <p className="text-xl font-bold">KES {material.price}</p>
@@ -357,7 +389,7 @@ const HeroSection = () => {
       ) : loading ? (
         <p className="text-center">Loading...</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4  justify-center place-items-center">
           {filteredMaterials.length === 0 ? (
             <p className="text-center col-span-4">
               No materials found for your search.
@@ -366,18 +398,56 @@ const HeroSection = () => {
             filteredMaterials.map((material) => (
               <div
                 key={material.material_id}
-                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200"
+                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 xl:px-20 xl:py-6"
               >
      
                 <div className="p-4">
+                <Image
+                  src={(() => {
+                    const name = material.material_name.toLowerCase();
+                    if (name.includes("paint")) {
+                      return "/images/paint.jpg";
+                    } else if (name.includes("cement")) {
+                      return "/images/duracem.jpg";
+                    } else if (name.includes("carpentry")) {
+                      return "/images/carpentry.jpg";
+                    }else if (name.includes("tiles")) {
+                      return "/images/tiles.jpg";
+                    }else if (name.includes("wood")) {
+                      return "/images/wood.jpg";
+                    }else if (name.includes("steel")) {
+                      return "/images/steel.png";
+                    }else if (name.includes("sheets")) {
+                      return "/images/sheets.jpg";
+                    }else if (name.includes("brick")) {
+                      return "/images/brick.jpeg";
+                    }else if (name.includes("cement")) {
+                      return "/images/duracem.jpg";
+                     }
+                     else if (name.includes("mabati")) {
+                      return "/images/sheets.jpg";
+                    }
+
+                     else {
+                      return (
+                        (typeof material.image === "string" && material.image) ||
+                        "/images/placeholder-image.png"
+                      );
+                    }
+                  })()}
+                  alt={material.material_name}
+                  width={140}
+                  height={140}
+                  className="rounded-lg mb-3"
+                />
                   <h3 className="font-semibold text-lg">{material.material_name}</h3>
                   <p className="text-gray-600">{material.brand_name}</p>
-                  <p className="text-xl font-bold">${material.price}</p>
+                  <p className="text-xl font-bold">KES {material.price}</p>
                   <button
                     onClick={() => handleAddToCart(material)}
                     className="mt-2 bg-[#F8B612] text-white px-4 py-2 rounded-full hover:bg-[#e5a610] transition duration-200"
                   >
-                    Add to Cart
+                    Buy Now
                   </button>
                 </div>
               </div>
