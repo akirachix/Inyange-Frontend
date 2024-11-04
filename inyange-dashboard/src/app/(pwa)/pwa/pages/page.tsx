@@ -1,10 +1,12 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { ChevronLeft, Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import { MaterialData } from "../utils/types";
 import { usePayment } from "../hooks/payment";
 import Image from "next/image";
+
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<MaterialData[]>([]);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -12,8 +14,8 @@ const CartPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const { processPayment, isSubmitting } = usePayment();
   const [budget, setBudget] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState(false); // Controls the pop-up visibility
-  // Load cart items and budget from localStorage
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const items = localStorage.getItem("cart");
     if (items) {
@@ -29,12 +31,12 @@ const CartPage = () => {
       setBudget(Number(savedBudget));
     }
   }, []);
-  // Calculate the total price of the cart
+
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  // Handle quantity change for cart items
+
   const handleQuantityChange = (id: number, increment: boolean) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -47,22 +49,27 @@ const CartPage = () => {
       )
     );
   };
-  // Remove an item from the cart
+
   const handleRemoveItem = (id: number) => {
     const updatedCartItems = cartItems.filter((item) => item.material_id !== id);
     setCartItems(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+
   const handleBudgetSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const budgetInput = (e.target as any).budget.value;
     setBudget(Number(budgetInput));
-    setShowModal(true); // Show pop-up after setting the budget
-    localStorage.setItem("userBudget", budgetInput); // Remove if not needed
-    // Automatically hide pop-up after 3 seconds
+    setShowModal(true);
+    localStorage.setItem("userBudget", budgetInput);
     setTimeout(() => setShowModal(false), 3000);
   };
-  // Handle payment submission
+
   const handlePayment = async () => {
     if (!phoneNumber.startsWith("254")) {
       setErrorMessage("Please enter your number starting with 254");
@@ -72,12 +79,15 @@ const CartPage = () => {
     try {
       await processPayment(totalPrice.toString(), phoneNumber);
       setSuccessMessage("Payment processed successfully!");
+      clearCart(); // Clear the cart after successful payment
     } catch (error) {
-      console.error("Payment error:", error); // Log the error
+      console.error("Payment error:", error);
       setErrorMessage("Payment failed. Please try again.");
     }
   };
+
   const isOverBudget = budget && totalPrice > budget;
+
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-6 sm:px-8 lg:px-14">
       <header className="flex items-center mb-8">
