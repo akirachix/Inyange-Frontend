@@ -352,8 +352,7 @@ const HeroSection = () => {
                       return "/images/brick.jpeg";
                     }else if (name.includes("cement")) {
                       return "/images/duracem.jpg";
-                      
-                    }
+                      }
                     else if (name.includes("mabati")) {
                       return "/images/sheets.jpg";
                     }

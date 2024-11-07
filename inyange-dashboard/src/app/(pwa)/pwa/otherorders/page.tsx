@@ -86,6 +86,9 @@ const OtherOrders = () => {
     } else if (name.includes("brick") || name.includes("Brick")) {
       return "/images/brick.jpeg";
     }
+    else if (name.includes("mabati")) {
+      return "/images/sheets.jpg";
+    }
     return "/images/placeholder-image.png";
   };
 

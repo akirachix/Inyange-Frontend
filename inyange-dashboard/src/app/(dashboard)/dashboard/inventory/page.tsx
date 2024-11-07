@@ -106,17 +106,16 @@ const InventoryPage: React.FC = () => {
                   <tr key={material.material_id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <Image
-                          src={
-                            typeof material.image === "string"
-                              ? material.image
-                              : placeholderImage
-                          }
-                          alt={material.material_name}
-                          width={40}
-                          height={40}
-                          className="w-10 h-10 rounded-full mr-3"
-                        />
+                     
+
+<Image
+  src={material.image ? placeholderImage : "/images/duracem.jpg"}
+  alt={material.material_name}
+  width={40}
+  height={40}
+  className="w-10 h-10 rounded-full mr-3"
+/>
+
 
                         <span>{material.material_name}</span>
                       </div>
