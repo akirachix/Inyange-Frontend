@@ -74,6 +74,8 @@ const Carpentry: React.FC = () => {
     setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
   };
 
+  const placeholderImage = "/images/cap.jpg"; // Default placeholder
+
   return (
     <Layout>
       <Navbar
@@ -94,8 +96,15 @@ const Carpentry: React.FC = () => {
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
                   <Image
-                    src="/images/cap.jpg"
-                    alt="Cap picture"
+                    src={
+                      material.image
+                        ? `${
+                            process.env.MEDIA_URL ||
+                            "https://buildmart-42eabdb55b17.herokuapp.com"
+                          }${material.image}`
+                        : placeholderImage
+                    }
+                    alt={material.material_name}
                     className="w-full h-32 sm:h-40 object-contain mb-4"
                     width={500}
                     height={600}
@@ -126,5 +135,3 @@ const Carpentry: React.FC = () => {
 };
 
 export default Carpentry;
-
-

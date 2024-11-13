@@ -76,6 +76,8 @@ const Cement: React.FC = () => {
     setTimeout(() => setShowAlert(false), 3000);
   };
 
+  const placeholderImage = "/images/tembo.jpg"; // Default placeholder
+
   return (
     <Layout>
       <Navbar
@@ -95,12 +97,16 @@ const Cement: React.FC = () => {
                   key={material.material_id}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
-                  <Image
-                    src="/images/tembo.jpg"
-                    alt="cap picture"
-                    className="w-full h-32 sm:h-40 object-contain mb-4 xl:w-[180%] xl:h-[50%]"
-                    width={500}
-                    height={600}
+                 <Image
+                     src={
+                     material.image
+                       ? `${process.env.MEDIA_URL || 'https://buildmart-42eabdb55b17.herokuapp.com'}${material.image}`
+                        : placeholderImage
+                    }
+                     alt={material.material_name}
+                     className="w-full h-32 sm:h-40 object-contain mb-4"
+                     width={500}
+                     height={600}
                   />
                   <h4 className="font-semibold xl:text-lg text-gray-900 mb-1">
                     KES {material.price}

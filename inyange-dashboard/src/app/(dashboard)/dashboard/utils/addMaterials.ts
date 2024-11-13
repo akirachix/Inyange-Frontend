@@ -7,6 +7,7 @@ export const addMaterial = async (details: MaterialData) => {
     const formData = new FormData();
     formData.append('material_name', data.material_name);
     formData.append('brand_name', data.brand_name);
+    formData.append('hardware_name', data.hardware_name);
     formData.append('category_name', data.category_name);
     formData.append('description', data.description);
     formData.append('quantity', data.quantity.toString());

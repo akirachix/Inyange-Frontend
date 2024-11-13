@@ -75,13 +75,13 @@ const Tiles: React.FC = () => {
     setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds };
   };
 
+  const placeholderImage = "/images/tiles.jpg"; // Default placeholder
+
   return (
     <Layout>
       <Navbar
         itemCount={cartItems.reduce((total, item) => total + item.quantity, 0)}
-        onAddToCart={() => {
-          /* Implement any necessary functionality here */
-        }}
+        onAddToCart={() => {}}
       />
       <div className="flex flex-row min-h-screen bg-gray-100 xl:mt-10">
         <div className="flex-1 p-4 sm:p-6 ml-52 xl:ml-72 pt-24 mt-6 xl:mt-24 md:mt-40 lg:mt-40 overflow-auto">
@@ -94,12 +94,16 @@ const Tiles: React.FC = () => {
                   key={material.material_id}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
-                  <Image
-                    src="/images/tiles.jpg"
-                    alt="tiles picture"
-                    className="w-full h-32 sm:h-40 object-contain mb-4"
-                    width={500}
-                    height={600}
+                 <Image
+                     src={
+                     material.image
+                       ? `${process.env.MEDIA_URL || 'https://buildmart-42eabdb55b17.herokuapp.com'}${material.image}`
+                        : placeholderImage
+                    }
+                     alt={material.material_name}
+                     className="w-full h-32 sm:h-40 object-contain mb-4"
+                     width={500}
+                     height={600}
                   />
                   <h4 className="font-semibold xl:text-lg text-gray-900 mb-1">
                     KES {material.price}
