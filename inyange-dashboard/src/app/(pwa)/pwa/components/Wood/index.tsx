@@ -16,7 +16,6 @@ const Wood: React.FC = () => {
     []
   );
 
-  // Local state for cart items
   const getCartItems = () => {
     const cartItems = localStorage.getItem("cart");
     return cartItems ? JSON.parse(cartItems) : [];
@@ -32,12 +31,10 @@ const Wood: React.FC = () => {
     }[]
   >(getCartItems());
 
-  // Save cart items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Filter materials that include 'wood' in their name
   useEffect(() => {
     const filtered = materials.filter((material) =>
       material.material_name.toLowerCase().includes("wood")
@@ -47,7 +44,6 @@ const Wood: React.FC = () => {
 
   const [, setShowAlert] = useState(false);
 
-  // Handle adding items to the cart
   const handleAddToCart = (material: MaterialData) => {
     const existingItem = cartItems.find(
       (item) => item.material_id === material.material_id
@@ -72,7 +68,6 @@ const Wood: React.FC = () => {
         },
       ]);
     }
-    // alert(`${material.material_name} has been added to your cart!`);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };

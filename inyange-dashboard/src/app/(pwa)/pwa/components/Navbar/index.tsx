@@ -28,12 +28,10 @@ const Navbar: React.FC<NavbarProps> = ({ itemCount }) => {
     }
   }, []);
 
-  // Store cart items in local storage when storedCartItems state changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(storedCartItems));
   }, [storedCartItems]);
 
-  // const Navbar = () => {
   return (
     <nav className="flex flex-row justify-between items-center w-full p-4 bg-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center px-6">
@@ -54,14 +52,6 @@ const Navbar: React.FC<NavbarProps> = ({ itemCount }) => {
       </div>
 
       <div className="relative">
-        {/* <Link href="/pwa/pages">
-         <span className="cursor-pointer">
-           <MdOutlineShoppingCart
-             className="text-[#263C5A] mr-[50px]"
-             size={40}
-           />
-         </span>
-       </Link> */}
 
         <Link
           href="/pwa/pages"

@@ -159,7 +159,7 @@ const CartPage = () => {
                 />
                 <input
                   type="text"
-                  placeholder="Enter Phone Number"
+                  placeholder="254 712345678"
                   className="w-full p-4 mb-12 border rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
