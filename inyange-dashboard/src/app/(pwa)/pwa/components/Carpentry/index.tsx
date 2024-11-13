@@ -26,6 +26,7 @@ const Carpentry: React.FC = () => {
       material_id: number;
       material_name: string;
       brand_name: string;
+      hardware_name: string;
       price: number;
       quantity: number;
     }[]
@@ -65,6 +66,7 @@ const Carpentry: React.FC = () => {
           material_id: material.material_id,
           material_name: material.material_name,
           brand_name: material.brand_name,
+          hardware_name: material.hardware_name,
           price: material.price,
           quantity: 1,
         },
@@ -117,6 +119,9 @@ const Carpentry: React.FC = () => {
                   </h4>
                   <p className="text-gray-600 xl:text-lg mb-1">
                     {material.brand_name}
+                  </p>
+                  <p className="text-gray-600 xl:text-lg mb-1">
+                    {material.hardware_name}
                   </p>
                   <button
                     onClick={() => handleAddToCart(material)}

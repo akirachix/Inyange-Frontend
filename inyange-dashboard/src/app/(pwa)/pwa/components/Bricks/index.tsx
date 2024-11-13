@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useMaterials } from "../../hooks/useMaterials";
 import { MaterialData } from "../../utils/types";
-import Image from "next/image";
 import Layout from "../Layout";
+import Image from "next/image";
 import Navbar from "../Navbar";
 
-const Steel: React.FC = () => {
+const Brick: React.FC = () => {
   const { materials, loading } = useMaterials() as {
     materials: MaterialData[];
     loading: boolean;
@@ -16,7 +16,6 @@ const Steel: React.FC = () => {
     []
   );
 
-  // Local state for cart items
   const getCartItems = () => {
     const cartItems = localStorage.getItem("cart");
     return cartItems ? JSON.parse(cartItems) : [];
@@ -38,14 +37,13 @@ const Steel: React.FC = () => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Filter materials that include 'steel' in their name
+  // Filter materials that include 'tiles' in their name
   useEffect(() => {
     const filtered = materials.filter((material) =>
-      material.material_name.toLowerCase().includes("steel")
+      material.material_name.toLowerCase().includes("brick")
     );
     setFilteredMaterials(filtered);
   }, [materials]);
-
   const [, setShowAlert] = useState(false);
 
   // Handle adding items to the cart
@@ -75,18 +73,17 @@ const Steel: React.FC = () => {
       ]);
     }
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
   };
 
-  const placeholderImage = "/images/steel.png"; // Default placeholder
-
+  const placeholderImage = "/images/brick.jpeg"; // Default placeholder
 
   return (
     <Layout>
       <Navbar
         itemCount={cartItems.reduce((total, item) => total + item.quantity, 0)}
-        onAddToCart={() => {
-          /* Implement any necessary functionality here */
+        onAddToCart={function (): void {
+          throw new Error("Function not implemented.");
         }}
       />
       <div className="flex flex-row min-h-screen bg-gray-100 xl:mt-10">
@@ -101,15 +98,18 @@ const Steel: React.FC = () => {
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
                   <Image
-                     src={
-                     material.image
-                       ? `${process.env.MEDIA_URL || 'https://buildmart-42eabdb55b17.herokuapp.com'}${material.image}`
+                    src={
+                      material.image
+                        ? `${
+                            process.env.MEDIA_URL ||
+                            "https://buildmart-42eabdb55b17.herokuapp.com"
+                          }${material.image}`
                         : placeholderImage
                     }
-                     alt={material.material_name}
-                     className="w-full h-32 sm:h-40 object-contain mb-4"
-                     width={500}
-                     height={600}
+                    alt={material.material_name}
+                    className="w-full h-32 sm:h-40 object-contain mb-4"
+                    width={500}
+                    height={600}
                   />
                   <h4 className="font-semibold xl:text-lg text-gray-900 mb-1">
                     KES {material.price}
@@ -139,4 +139,4 @@ const Steel: React.FC = () => {
   );
 };
 
-export default Steel;
+export default Brick;
