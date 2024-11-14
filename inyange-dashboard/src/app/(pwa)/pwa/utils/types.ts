@@ -3,6 +3,7 @@ export interface Credentials{
   password:string;
 }
 export interface MaterialData {
+  hardware_name: string;
   material_id: number;
   material_name: string;
   brand_name: string;

@@ -26,6 +26,7 @@ const Carpentry: React.FC = () => {
       material_id: number;
       material_name: string;
       brand_name: string;
+      hardware_name: string;
       price: number;
       quantity: number;
     }[]
@@ -65,6 +66,7 @@ const Carpentry: React.FC = () => {
           material_id: material.material_id,
           material_name: material.material_name,
           brand_name: material.brand_name,
+          hardware_name: material.hardware_name,
           price: material.price,
           quantity: 1,
         },
@@ -73,6 +75,8 @@ const Carpentry: React.FC = () => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
   };
+
+  const placeholderImage = "/images/cap.jpg"; // Default placeholder
 
   return (
     <Layout>
@@ -94,8 +98,15 @@ const Carpentry: React.FC = () => {
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
                   <Image
-                    src="/images/cap.jpg"
-                    alt="Cap picture"
+                    src={
+                      material.image
+                        ? `${
+                            process.env.MEDIA_URL ||
+                            "https://buildmart-42eabdb55b17.herokuapp.com"
+                          }${material.image}`
+                        : placeholderImage
+                    }
+                    alt={material.material_name}
                     className="w-full h-32 sm:h-40 object-contain mb-4"
                     width={500}
                     height={600}
@@ -108,6 +119,9 @@ const Carpentry: React.FC = () => {
                   </h4>
                   <p className="text-gray-600 xl:text-lg mb-1">
                     {material.brand_name}
+                  </p>
+                  <p className="text-gray-600 xl:text-lg mb-1">
+                    {material.hardware_name}
                   </p>
                   <button
                     onClick={() => handleAddToCart(material)}
@@ -126,5 +140,3 @@ const Carpentry: React.FC = () => {
 };
 
 export default Carpentry;
-
-

@@ -19,6 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
       'cement': 'Building Materials',
       'paint': 'Finishing Materials',
       'tiles': 'Finishing Materials',
+      'brick': 'Finishing Materials',
       'carpentry': 'Hardware and Tools',
     };
     return materialCategories[material] || null;
@@ -87,7 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, selectedCategory })
             </div>
             {expandedCategory === 'Finishing Materials' && (
               <ul className="pl-6 mt-2 space-y-2">
-                {['paint', 'tiles'].map((material) => (
+                {['paint', 'tiles', 'brick'].map((material) => (
                   <li
                     key={material}
                     className={`cursor-pointer px-4 py-2 rounded-md transition-colors duration-200 ease-in-out ${

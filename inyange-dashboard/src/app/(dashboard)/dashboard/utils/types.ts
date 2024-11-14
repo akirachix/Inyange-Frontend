@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export interface MaterialData {
   material_id: number
   material_name: string;
+  hardware_name :string;
   brand_name: string;
   category_name: string;
   description: string;
@@ -16,11 +17,11 @@ export interface NewMaterialData {
   brand_name: string;
   category_name: string;
   description: string;
+  hardware_name :string;
   quantity: number;
   price: number;
   image: File | null;
 }
-
 
   export interface CartItem {
     material_id: number;

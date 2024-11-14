@@ -10,11 +10,11 @@ const DashboardPage: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [currentMaterialGroup, setCurrentMaterialGroup] = React.useState(0);
-  const MATERIALS_PER_GROUP = 10; // Number of materials to show per group
-  const MAX_MATERIALS = 100; // Maximum number of materials to handle
+  const MATERIALS_PER_GROUP = 10;
+  const MAX_MATERIALS = 100;
 
   const [currentBrandGroup, setCurrentBrandGroup] = React.useState(0);
-  const BRANDS_PER_GROUP = 10; // Number of brands to show per group
+  const BRANDS_PER_GROUP = 10;
 
   React.useEffect(() => {
     const fetchMaterials = async () => {

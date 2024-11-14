@@ -6,6 +6,9 @@ const nextConfig = {
     env: {
       BASE_URL: process.env.BASE_URL,  
     },
+    images: {
+    domains: ['buildmart-42eabdb55b17.herokuapp.com'], 
+  },
   };
 
   const withPWAConfig = withPWA({
