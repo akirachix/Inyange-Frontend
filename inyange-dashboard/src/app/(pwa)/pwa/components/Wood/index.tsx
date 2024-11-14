@@ -16,7 +16,6 @@ const Wood: React.FC = () => {
     []
   );
 
-  // Local state for cart items
   const getCartItems = () => {
     const cartItems = localStorage.getItem("cart");
     return cartItems ? JSON.parse(cartItems) : [];
@@ -27,17 +26,16 @@ const Wood: React.FC = () => {
       material_id: number;
       material_name: string;
       brand_name: string;
+      hardware_name: string;
       price: number;
       quantity: number;
     }[]
   >(getCartItems());
 
-  // Save cart items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Filter materials that include 'wood' in their name
   useEffect(() => {
     const filtered = materials.filter((material) =>
       material.material_name.toLowerCase().includes("wood")
@@ -47,7 +45,6 @@ const Wood: React.FC = () => {
 
   const [, setShowAlert] = useState(false);
 
-  // Handle adding items to the cart
   const handleAddToCart = (material: MaterialData) => {
     const existingItem = cartItems.find(
       (item) => item.material_id === material.material_id
@@ -67,15 +64,18 @@ const Wood: React.FC = () => {
           material_id: material.material_id,
           material_name: material.material_name,
           brand_name: material.brand_name,
+          hardware_name: material.hardware_name,
           price: material.price,
           quantity: 1,
         },
       ]);
     }
-    // alert(`${material.material_name} has been added to your cart!`);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
+
+  const placeholderImage = "/images/wood.jpg"; // Default placeholder
+
 
   return (
     <Layout>
@@ -96,12 +96,16 @@ const Wood: React.FC = () => {
                   key={material.material_id}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
-                  <Image
-                    src="/images/wood.jpg"
-                    alt="Cap picture"
-                    className="w-full h-32 sm:h-40 object-contain mb-4"
-                    width={500}
-                    height={600}
+                    <Image
+                     src={
+                     material.image
+                       ? `${process.env.MEDIA_URL || 'https://buildmart-42eabdb55b17.herokuapp.com'}${material.image}`
+                        : placeholderImage
+                    }
+                     alt={material.material_name}
+                     className="w-full h-32 sm:h-40 object-contain mb-4"
+                     width={500}
+                     height={600}
                   />
                   <h4 className="font-semibold xl:text-lg text-gray-900 mb-1">
                     KES {material.price}
@@ -111,6 +115,9 @@ const Wood: React.FC = () => {
                   </h4>
                   <p className="text-gray-600 xl:text-lg mb-1">
                     {material.brand_name}
+                  </p>
+                  <p className="text-gray-600 xl:text-lg mb-1">
+                    {material.hardware_name}
                   </p>
                   <button
                     onClick={() => handleAddToCart(material)}

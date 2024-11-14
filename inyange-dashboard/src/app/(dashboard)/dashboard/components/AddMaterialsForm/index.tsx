@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,7 +5,7 @@ import * as yup from "yup";
 import { FaTimes } from "react-icons/fa";
 import { IoCloudUpload } from "react-icons/io5";
 import { addMaterial } from "../../utils/addMaterials";
-import Image from 'next/image';
+import Image from "next/image";
 import { MaterialData } from "../../utils/types";
 
 interface AddMaterialModalProps {
@@ -19,6 +18,7 @@ const schema = yup.object().shape({
   brand_name: yup.string().required("Brand name is required"),
   category_name: yup.string().required("Category name is required"),
   description: yup.string().required("Description is required"),
+  hardware_name: yup.string().required("Hardware name is required"),
   quantity: yup.number().required("Quantity is required").positive().integer(),
   price: yup.number().required("Price is required").positive(),
   image: yup.mixed().nullable(),
@@ -43,6 +43,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
     defaultValues: {
       material_name: "",
       brand_name: "",
+      hardware_name: "",
       category_name: "",
       description: "",
       quantity: 0,
@@ -92,11 +93,11 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
     }
   };
 
-    return (
+  return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-5xl">
         <div className="flex justify-between items-center p-6 border-b">
-          <h2 className="text-2xl font-bold text-[#263C5A]">Add Materials</h2>
+          <h2 className="text-[20px] font-bold text-[#263C5A]">Add Materials</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
@@ -109,7 +110,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label className="block text-[14px] font-medium mb-1">
                   Material Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -127,7 +128,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1 mt-4">
+                <label className="block text-[14px] font-medium mb-1 mt-4">
                   Brand Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -144,7 +145,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
                 )}
               </div>
 
-              <label className="block text-sm font-medium mb-1 mt-4">
+              <label className="block text-[14px] font-medium mb-1 mt-4">
                 Category Name <span className="text-red-500">*</span>
               </label>
 
@@ -167,7 +168,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
               )}
 
               <div>
-                <label className="block text-sm font-medium mb-1 mt-4">
+                <label className="block text-[14px] font-medium mb-1 mt-4">
                   Description <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -182,14 +183,14 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
                     {errors.description.message}
                   </p>
                 )}
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-sm text-gray-400 mt-1">
                   Do not exceed 100 characters when entering the description
                 </p>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-[14px] font-medium mb-1">
                 Add Material Photo
               </label>
               <div className="border border-dashed border-gray-300 rounded-md p-4 text-center relative">
@@ -202,7 +203,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
                 />
                 {imagePreview ? (
                   <div className="relative">
-                      <Image
+                    <Image
                       src={imagePreview}
                       alt="Preview"
                       className="max-h-24 mx-auto"
@@ -239,7 +240,25 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1 mt-4">
+                <label className="block text-[14px] font-medium mb-1 mt-4">
+                  Hardware Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("hardware_name")}
+                  className={`w-full border px-3 py-2 rounded-md ${
+                    errors.hardware_name ? "border-red-500" : ""
+                  }`}
+                />
+                {errors.hardware_name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.hardware_name.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-[14px] font-medium mb-1 mt-4">
                   Quantity <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -257,7 +276,7 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1 mt-4">
+                <label className="block text-[14px] font-medium mb-1 mt-4">
                   Price <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -290,14 +309,14 @@ const AddMaterialModal = ({ onClose }: AddMaterialModalProps) => {
             <button
               type="button"
               onClick={onClose}
-              className="mr-4 px-4 py-2 bg-white text-[#F8B612] font-bold border border-[#263C5A] rounded-lg hover:bg-gray-100 transition-colors duration-300"
+              className="mr-4 px-4 py-2 bg-white text-[#F8B612] font-bold border border-[#263C5A] rounded-lg hover:bg-gray-100 transition-colors duration-300 text-[13px]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-[#F8B612] text-[#263C5A] font-bold rounded-lg hover:bg-[#E6A300] transition-colors duration-300"
+              className="px-4 py-2 bg-[#F8B612] text-[#263C5A] font-bold rounded-lg hover:bg-[#E6A300] transition-colors duration-300 text-[14px]"
             >
               {loading ? "Submitting..." : "Save"}
             </button>

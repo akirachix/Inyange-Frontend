@@ -27,6 +27,7 @@ const Cement: React.FC = () => {
       material_id: number;
       material_name: string;
       brand_name: string;
+      hardware_name: string;
       price: number;
       quantity: number;
     }[]
@@ -67,6 +68,7 @@ const Cement: React.FC = () => {
           material_id: material.material_id,
           material_name: material.material_name,
           brand_name: material.brand_name,
+          hardware_name: material.hardware_name,
           price: material.price,
           quantity: 1,
         },
@@ -75,6 +77,8 @@ const Cement: React.FC = () => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
+
+  const placeholderImage = "/images/tembo.jpg"; // Default placeholder
 
   return (
     <Layout>
@@ -95,12 +99,16 @@ const Cement: React.FC = () => {
                   key={material.material_id}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col cursor-pointer"
                 >
-                  <Image
-                    src="/images/tembo.jpg"
-                    alt="cap picture"
-                    className="w-full h-32 sm:h-40 object-contain mb-4 xl:w-[180%] xl:h-[50%]"
-                    width={500}
-                    height={600}
+                 <Image
+                     src={
+                     material.image
+                       ? `${process.env.MEDIA_URL || 'https://buildmart-42eabdb55b17.herokuapp.com'}${material.image}`
+                        : placeholderImage
+                    }
+                     alt={material.material_name}
+                     className="w-full h-32 sm:h-40 object-contain mb-4"
+                     width={500}
+                     height={600}
                   />
                   <h4 className="font-semibold xl:text-lg text-gray-900 mb-1">
                     KES {material.price}
@@ -110,6 +118,9 @@ const Cement: React.FC = () => {
                   </h4>
                   <p className="text-gray-600 xl:text-lg mb-1">
                     {material.brand_name}
+                  </p>
+                  <p className="text-gray-600 xl:text-lg mb-1">
+                    {material.hardware_name}
                   </p>
                   <button
                     onClick={() => handleAddToCart(material)}

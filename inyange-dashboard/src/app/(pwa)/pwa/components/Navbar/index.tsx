@@ -46,7 +46,6 @@ const Navbar: React.FC<NavbarProps> = ({ itemCount }) => {
          <FiChevronLeft size={40} className="lg:w-[50px]" />
        </Link>
 
-
        <Image
          src="/images/bmLogo.png"
          alt="BuildMart Logo"
@@ -73,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ itemCount }) => {
        
        </Link>
        {itemCount > 0 && (
-         <span className="absolute -top-[-35px] -left-[-30px] bg-yellow-500 text-white rounded-full w-14 h-10 sm:w-7 sm:h-7 lg:w-9 lg:h-9 flex items-center justify-center text-[15px] sm:text-[14px] lg:text-[18px]">
+         <span className="absolute -top-[-25px] -left-[-20px] bg-yellow-500 text-white rounded-full w-14 h-10 sm:w-7 sm:h-7 lg:w-9 lg:h-9 flex items-center justify-center text-[15px] sm:text-[14px] lg:text-[18px]">
            {itemCount}
          </span>
        )}

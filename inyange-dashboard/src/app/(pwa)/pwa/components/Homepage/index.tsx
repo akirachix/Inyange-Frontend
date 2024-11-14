@@ -91,9 +91,9 @@ const HeroSection = () => {
           <Image
             src="/images/bmLogo.png"
             alt="Logo"
-            width={160}
+            width={130}
             height={60}
-            className="w-40 sm:w-48 lg:w-[100%] xl:w-[103%] xl:ml-[-5px] sm:ml-[-100px] md:ml-[-10px]"
+            className="w-40 sm:w-48 lg:w-[100%] xl:w-[103%] xl:ml-[-5px] sm:ml-[-100px] md:ml-[-10px] xl:mt-[20px]"
           />
         </div>
         <div className="relative flex items-center space-x-10 sm:space-x-8 md:space-x-10 mx-auto md:mx-0 xl:mt-[20px] xl:justify-evenly pr-8 xl:gap-[20px]">
@@ -352,8 +352,7 @@ const HeroSection = () => {
                       return "/images/brick.jpeg";
                     }else if (name.includes("cement")) {
                       return "/images/duracem.jpg";
-                      
-                    }
+                      }
                     else if (name.includes("mabati")) {
                       return "/images/sheets.jpg";
                     }
