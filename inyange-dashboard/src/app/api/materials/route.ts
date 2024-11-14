@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 
-interface RequestData {
-  [key: string]: FormDataEntryValue;
-}
 
 const baseUrl = process.env.BASE_URL;
 
@@ -17,19 +14,25 @@ export async function POST(request: Request) {
 
   try {
     const formData = await request.formData();
-    const requestData: RequestData = {};
+    
+    // Create a new FormData to send to the backend
+    const dataToSend = new FormData();
+    
+    // Transfer all fields to the new FormData
     formData.forEach((value, key) => {
-      requestData[key] = value;
+      if (value instanceof File) {
+        dataToSend.append(key, value, value.name);
+      } else {
+        dataToSend.append(key, value);
+      }
     });
 
-    console.log("Received form data:", requestData);
+    console.log("Received form data:", Object.fromEntries(formData.entries()));
 
     const response = await fetch(`${baseUrl}/api/materials/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
+      // Remove the Content-Type header to let the browser set it automatically for FormData
+      body: dataToSend,
     });
 
     if (!response.ok) {
@@ -59,7 +62,9 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(`${baseUrl}/api/materials/`);
+    const response = await fetch(`${baseUrl}/api/materials/`,{
+      next: { revalidate: 10 }, 
+    });
     if (!response.ok) {
       const textResponse = await response.text();
       console.error('GET error response:', textResponse);
